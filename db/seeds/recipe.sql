@@ -1,0 +1,1 @@
+INSERT INTO recipe (name) VALUES ('Quinoa Fried Rice with Sticky Spiced Chicken');

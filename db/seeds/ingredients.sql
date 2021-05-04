@@ -1,0 +1,17 @@
+INSERT INTO ingredient (name, type_id) VALUES ('Uncooked Quinoa', 5);
+INSERT INTO ingredient (name, type_id) VALUES ('Red Onion', 3);
+INSERT INTO ingredient (name, type_id) VALUES ('Red Bell Pepper', 3);
+INSERT INTO ingredient (name, type_id) VALUES ('Broccoli Florets', 3);
+INSERT INTO ingredient (name, type_id) VALUES ('Carrots', 3);
+INSERT INTO ingredient (name, type_id) VALUES ('Garlic', 1);
+INSERT INTO ingredient (name, type_id) VALUES ('Ginger', 1);
+INSERT INTO ingredient (name, type_id) VALUES ('Frozen Peas', 3);
+INSERT INTO ingredient (name, type_id) VALUES ('Soy Sauce', 7);
+INSERT INTO ingredient (name, type_id) VALUES ('Seasame Oil', 7);
+INSERT INTO ingredient (name, type_id) VALUES ('Green Onion', 3);
+INSERT INTO ingredient (name, type_id) VALUES ('Seasame Seeds', 1);
+INSERT INTO ingredient (name, type_id) VALUES ('Salt', 1);
+INSERT INTO ingredient (name, type_id) VALUES ('Olive Oil', 7);
+INSERT INTO ingredient (name, type_id) VALUES ('Boneless Skinless Chicken Thighs', 4);
+INSERT INTO ingredient (name, type_id) VALUES ('Sweet Chili Sauce', 7);
+INSERT INTO ingredient (name, type_id) VALUES ('Chinese 5-Spice', 1);

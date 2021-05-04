@@ -17,6 +17,24 @@ const getAllTypes = (request, response) => {
   })
 }
 
+const getAllIngredients = (request, response) => {
+  pool.query('SELECT * FROM ingredient ORDER BY type_id;', (error, results) => {
+
+    response.send(results.rows);
+  });
+}
+
+const addNewIngredient = (name, type, res) => {
+  pool.query(
+    `INSERT INTO ingredient (name, type_id) 
+    VALUES ($1, $2);
+    `, [name, type]
+  )
+  res.send("Success!");
+};
+
 module.exports = {
-  getAllTypes
+  getAllTypes,
+  addNewIngredient,
+  getAllIngredients
 }
