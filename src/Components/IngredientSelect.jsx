@@ -15,8 +15,8 @@ const IngredientSelect = (props) => {
   return (
     <div>
       <InputLabel id={props.label}>{props.label}</InputLabel>
-      <Select labelId={props.label}>
-        <MenuItem>""</MenuItem>
+      <Select labelId={props.label} onChange={props.setIngredient}>
+        <MenuItem>Add New Ingredient</MenuItem>
         {ingredients.map((item)=> {
           return (
             <MenuItem key = {item.id} value={item.name}>{item.name}</MenuItem>
