@@ -4,7 +4,6 @@ import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import "./AddNewRecipe.css";
 import { useState, useEffect } from "react";
 import AutoComplete from "@material-ui/lab/Autocomplete";
-import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 
 const AddNewRecipe = (props) => {
@@ -13,6 +12,7 @@ const AddNewRecipe = (props) => {
   const [existingIng, setExistingIng] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [numIngredients, setNumIngredients] = useState(0);
+  const [measurement, setMeasurement] = useState("");
   const items = [];
 
   useEffect(() => {
@@ -29,9 +29,17 @@ const AddNewRecipe = (props) => {
     }
   };
 
+  const handleMeasurement = (index, event) => {
+    let arr = [...measurement];
+    if (event) {
+      arr[index] = event.target.value;
+      setMeasurement(arr);
+    }
+  };
+
   for (let i = 0; i <= numIngredients; i++) {
     items.push(
-      <div className = "ingredient">
+      <div className="ingredient">
         <AutoComplete
           key={i}
           style={{ width: "200px", marginTop: "10px" }}
@@ -53,7 +61,12 @@ const AddNewRecipe = (props) => {
             </Button>
           }
         />
-        <TextField style={{width: "100px", marginTop: "10px"}} placeholder= "1 tsp" variant="outlined" />
+        <TextField
+          style={{ width: "100px", marginTop: "10px" }}
+          placeholder="1 tsp"
+          variant="outlined"
+          onChange={(event) => handleMeasurement(i, event)}
+        />
       </div>
     );
   }
@@ -82,6 +95,7 @@ const AddNewRecipe = (props) => {
     console.log(recipeName);
     console.log(directions);
     console.log(ingredients);
+    console.log(measurement);
   };
 
   return (
