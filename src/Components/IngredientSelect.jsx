@@ -22,11 +22,12 @@ const IngredientSelect = (props) => {
   return (
     <div style={{ width: 200 }}>
       <AutoComplete
-      id="ingredients"
+      id="ingredient"
       options = {ingredients}
       getOptionLabel={(option) => option.name}
-      renderInput={(params) => <TextField {...params} label="Ingredients" varient="outlined" />}
-      onChange = {handleChange}
+      getOptionSelected={(option, value) => option.name === value.name}
+      renderInput={(params) => <TextField {...params} label="Ingredient" varient="outlined" />}
+      onChange = {(event, value) => props.onChange(event, value)}
       />
     </div>
   );

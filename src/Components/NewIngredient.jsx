@@ -3,6 +3,7 @@ import { useState } from "react";
 import IngredientSelect from "./IngredientSelect";
 import Icon from "@material-ui/core/Icon";
 import "./NewIngredient.css";
+import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 
 const NewIngredient = () => {
   const [ingredients, setIngredients] = useState([
@@ -41,6 +42,8 @@ const NewIngredient = () => {
         <Icon className="add-button" onClick={() => decreaseIngredient()}>
           remove
         </Icon>
+        <br />
+        <TextareaAutosize style = {{ width: "400px" }} rowsMin={20} placeholder="Directions" />
       </form>
     </div>
   );
