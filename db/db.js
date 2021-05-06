@@ -56,7 +56,7 @@ const resetRecipes = () => {
 const resetIngredientList = () => {
   pool.query(
     `
-    DROP TABLE IF EXISTS ingredient_list CASCADE
+    DROP TABLE IF EXISTS ingredient_list CASCADE;
     CREATE TABLE ingredient_list (
       id SERIAL PRIMARY KEY NOT NULL,
       recipe_id INTEGER REFERENCES recipe(id) ON DELETE CASCADE,
@@ -64,7 +64,7 @@ const resetIngredientList = () => {
       measurement VARCHAR(255)
     );
     `
-  );
+  )
 }
 
 const resetDB = () => {
