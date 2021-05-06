@@ -4,6 +4,8 @@ import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import "./AddNewRecipe.css";
 import { useState, useEffect } from "react";
 import AutoComplete from "@material-ui/lab/Autocomplete";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
 
 const AddNewRecipe = (props) => {
   const [recipeName, setRecipeName] = useState("");
@@ -21,19 +23,28 @@ const AddNewRecipe = (props) => {
 
   const handleIngredient = (index, event, value) => {
     let arr = [...ingredients];
-    arr[index] = value.name;
-    setIngredients(arr);
+    if (value) {
+      arr[index] = value.name;
+      setIngredients(arr);
+
+    }
   }
 
   for (let i = 0; i <= numIngredients; i++) {
     items.push(
       <AutoComplete key = {i} 
+      style={{width: "200px", marginTop: "10px"}}
       id = "ingredient"
       options = {existingIng}
       getOptionLabel={(option) => option.name}
       getOptionSelected={(option, value) => option.name === value.name}
       renderInput={(params) => <TextField {...params} label = "Ingredient" variant="outlined" />}
       onChange = {(event, value) => handleIngredient(i, event, value)}
+      noOptionsText = {(
+        
+          <Button variant="outlined" color="primary" onMouseDown={() => console.log("Add new")}>Add New Ingredient</Button>
+        
+      )}
       />
     )
   }
@@ -72,6 +83,7 @@ const AddNewRecipe = (props) => {
           id="standard-basic"
           label="Recipe Name"
           onChange={handleRecipeName}
+          variant="outlined"
         />
         <div className="ingredient-list">
           {items}

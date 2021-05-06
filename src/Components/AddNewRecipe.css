@@ -6,5 +6,10 @@
 }
 
 .ingredient-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
   margin-top: 20px;
+  width: 500px;
 }
