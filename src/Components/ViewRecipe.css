@@ -1,0 +1,29 @@
+body {
+  background-color: #fcd5ce;
+}
+
+.recipe-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80vw;
+  height: 80vh;
+  background-color: #f8edeb;
+  margin-top: 10vh;
+  border-radius: 10px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.ingredients {
+  width: 80%;
+  
+}
+
+.directions {
+  width: 80%;
+  
+}
