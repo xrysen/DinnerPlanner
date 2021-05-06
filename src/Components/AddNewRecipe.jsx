@@ -10,9 +10,11 @@ const AddNewRecipe = (props) => {
   const [recipeName, setRecipeName] = useState("");
   const [directions, setDirections] = useState("");
   const [existingIng, setExistingIng] = useState([]);
-  const [ingredients, setIngredients] = useState([]);
+  const [ingredients, setIngredients] = useState([{
+    ingredient: "",
+    measurement: ""
+  }]);
   const [numIngredients, setNumIngredients] = useState(0);
-  const [measurement, setMeasurement] = useState("");
   const items = [];
 
   useEffect(() => {
@@ -24,16 +26,16 @@ const AddNewRecipe = (props) => {
   const handleIngredient = (index, event, value) => {
     let arr = [...ingredients];
     if (value) {
-      arr[index] = value;
+      arr[index].ingredient = value.id;
       setIngredients(arr);
     }
   };
 
   const handleMeasurement = (index, event) => {
-    let arr = [...measurement];
+    let arr = [...ingredients];
     if (event) {
-      arr[index] = event.target.value;
-      setMeasurement(arr);
+      arr[index].measurement = event.target.value;
+      setIngredients(arr);
     }
   };
 
@@ -74,6 +76,9 @@ const AddNewRecipe = (props) => {
 
   const increaseIngredientCount = () => {
     setNumIngredients(numIngredients + 1);
+    let arr = [...ingredients];
+    arr.push({ ingredient: "", measurement: ""});
+    setIngredients(arr);
   };
 
   const decreaseIngredientCount = () => {
@@ -95,8 +100,7 @@ const AddNewRecipe = (props) => {
     let obj = {
       name: recipeName,
       directions: directions,
-      ingredients: ingredients,
-      measurements: measurement
+      ingredients: ingredients
     }
     event.preventDefault();
     fetch("http://localhost:8080/recipes", {

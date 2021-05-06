@@ -21,12 +21,15 @@ app.get("/reset", (req, res) => {
 });
 
 app.post("/recipes", (req, res) => {
-  console.log(req.body.measurements[0]);
+  console.log(req.body);
   db.addNewRecipe(req.body.name, req.body.directions);
   db.getLastRecipeId()
   .then(res => {
     if (res.rows[0].id) {
-      db.updateIngredientList(res.rows[0].id, req.body.ingredients[0].id, req.body.measurements[0]);
+        for (const item of req.body.ingredients) {
+          db.updateIngredientList(res.rows[0].id, item.ingredient, item.measurement);
+
+        }
     }
   })
 });
