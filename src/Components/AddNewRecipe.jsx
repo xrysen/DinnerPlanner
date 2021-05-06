@@ -66,6 +66,7 @@ const AddNewRecipe = (props) => {
           placeholder="1 tsp"
           variant="outlined"
           onChange={(event) => handleMeasurement(i, event)}
+          required
         />
       </div>
     );
@@ -91,11 +92,25 @@ const AddNewRecipe = (props) => {
   };
 
   const handleSubmit = (event) => {
+    let obj = {
+      name: recipeName,
+      directions: directions,
+      ingredients: ingredients,
+      measurements: measurement
+    }
     event.preventDefault();
-    console.log(recipeName);
-    console.log(directions);
-    console.log(ingredients);
-    console.log(measurement);
+    fetch("http://localhost:8080/recipes", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify(obj),
+      mode: 'cors'
+    })
+    .then(response => response.json())
+    .then(data => { console.log("Success", data)})
+    .catch((error) => console.log(error));
   };
 
   return (
@@ -107,6 +122,7 @@ const AddNewRecipe = (props) => {
           label="Recipe Name"
           onChange={handleRecipeName}
           variant="outlined"
+          required
         />
         <div className="ingredient-list">{items}</div>
         <div className="icons">
@@ -123,7 +139,7 @@ const AddNewRecipe = (props) => {
           rowsMin={20}
           placeholder="Recipe Directions"
         />
-        <input type="submit" value="Submit" />
+        <input style={{marginTop: "20px"}} type="submit" value="Submit" />
       </form>
     </div>
   );
