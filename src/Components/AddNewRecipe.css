@@ -13,3 +13,20 @@
   margin-top: 20px;
   width: 500px;
 }
+
+.icons {
+  margin-top: 20px;
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.icon:hover {
+  cursor: pointer;
+}
+
+.ingredient {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+}

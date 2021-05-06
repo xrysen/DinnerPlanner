@@ -17,8 +17,8 @@ const AddNewRecipe = (props) => {
 
   useEffect(() => {
     fetch("http://localhost:8080/ingredients")
-    .then((res) => res.json())
-    .then((res) => setExistingIng(res));
+      .then((res) => res.json())
+      .then((res) => setExistingIng(res));
   }, [existingIng]);
 
   const handleIngredient = (index, event, value) => {
@@ -26,27 +26,36 @@ const AddNewRecipe = (props) => {
     if (value) {
       arr[index] = value.name;
       setIngredients(arr);
-
     }
-  }
+  };
 
   for (let i = 0; i <= numIngredients; i++) {
     items.push(
-      <AutoComplete key = {i} 
-      style={{width: "200px", marginTop: "10px"}}
-      id = "ingredient"
-      options = {existingIng}
-      getOptionLabel={(option) => option.name}
-      getOptionSelected={(option, value) => option.name === value.name}
-      renderInput={(params) => <TextField {...params} label = "Ingredient" variant="outlined" />}
-      onChange = {(event, value) => handleIngredient(i, event, value)}
-      noOptionsText = {(
-        
-          <Button variant="outlined" color="primary" onMouseDown={() => console.log("Add new")}>Add New Ingredient</Button>
-        
-      )}
-      />
-    )
+      <div className = "ingredient">
+        <AutoComplete
+          key={i}
+          style={{ width: "200px", marginTop: "10px" }}
+          id="ingredient"
+          options={existingIng}
+          getOptionLabel={(option) => option.name}
+          getOptionSelected={(option, value) => option.name === value.name}
+          renderInput={(params) => (
+            <TextField {...params} label="Ingredient" variant="outlined" />
+          )}
+          onChange={(event, value) => handleIngredient(i, event, value)}
+          noOptionsText={
+            <Button
+              variant="outlined"
+              color="primary"
+              onMouseDown={() => console.log("Add new")}
+            >
+              Add New Ingredient
+            </Button>
+          }
+        />
+        <TextField style={{width: "100px", marginTop: "10px"}} placeholder= "1 tsp" variant="outlined" />
+      </div>
+    );
   }
 
   const increaseIngredientCount = () => {
@@ -76,7 +85,7 @@ const AddNewRecipe = (props) => {
   };
 
   return (
-    <div>
+    <div style={{ textAlign: "center" }}>
       <h1>Add New Recipe</h1>
       <form className="form-container" onSubmit={handleSubmit}>
         <TextField
@@ -85,11 +94,15 @@ const AddNewRecipe = (props) => {
           onChange={handleRecipeName}
           variant="outlined"
         />
-        <div className="ingredient-list">
-          {items}
+        <div className="ingredient-list">{items}</div>
+        <div className="icons">
+          <Icon className="icon" onClick={() => increaseIngredientCount()}>
+            add_circle
+          </Icon>
+          <Icon className="icon" onClick={() => decreaseIngredientCount()}>
+            remove
+          </Icon>
         </div>
-        <Icon onClick={() => increaseIngredientCount()}>add_circle</Icon>
-        <Icon onClick={() => decreaseIngredientCount()}>-</Icon>
         <TextareaAutosize
           onChange={handleDirections}
           style={{ width: "400px", marginTop: "30px" }}
