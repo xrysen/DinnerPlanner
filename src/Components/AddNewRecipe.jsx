@@ -3,7 +3,6 @@ import Icon from "@material-ui/core/Icon";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import "./AddNewRecipe.css";
 import { useState, useEffect } from "react";
-import IngredientSelect from "./IngredientSelect";
 import AutoComplete from "@material-ui/lab/Autocomplete";
 
 const AddNewRecipe = (props) => {
@@ -44,12 +43,10 @@ const AddNewRecipe = (props) => {
   };
 
   const decreaseIngredientCount = () => {
-    let arr = [...numIngredients];
+    let arr = [...ingredients];
     arr.pop();
-    if (arr.length === 0) {
-      arr = [<IngredientSelect key={0} />];
-    }
-    setNumIngredients(arr);
+    setIngredients(arr);
+    setNumIngredients(numIngredients - 1);
   };
 
   const handleRecipeName = (event) => {
@@ -76,10 +73,11 @@ const AddNewRecipe = (props) => {
           label="Recipe Name"
           onChange={handleRecipeName}
         />
-        <div style={{width: 200}}>
+        <div className="ingredient-list">
           {items}
         </div>
         <Icon onClick={() => increaseIngredientCount()}>add_circle</Icon>
+        <Icon onClick={() => decreaseIngredientCount()}>-</Icon>
         <TextareaAutosize
           onChange={handleDirections}
           style={{ width: "400px", marginTop: "30px" }}
