@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-require('dotenv').config();
+require("dotenv").config();
 const cors = require("cors");
 const db = require("../db/db");
 const PORT = 8080 || process.env.PORT;
@@ -21,17 +21,18 @@ app.get("/reset", (req, res) => {
 });
 
 app.post("/recipes", (req, res) => {
-  console.log(req.body);
   db.addNewRecipe(req.body.name, req.body.directions);
-  db.getLastRecipeId()
-  .then(res => {
+  db.getLastRecipeId().then((res) => {
     if (res.rows[0].id) {
-        for (const item of req.body.ingredients) {
-          db.updateIngredientList(res.rows[0].id, item.ingredient, item.measurement);
-
-        }
+      for (const item of req.body.ingredients) {
+        db.updateIngredientList(
+          res.rows[0].id,
+          item.ingredient,
+          item.measurement
+        );
+      }
     }
-  })
+  });
 });
 
 app.listen(PORT, () => {
