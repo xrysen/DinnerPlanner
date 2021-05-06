@@ -2,30 +2,45 @@ import TextField from "@material-ui/core/TextField";
 import Icon from "@material-ui/core/Icon";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import "./AddNewRecipe.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import IngredientSelect from "./IngredientSelect";
+import AutoComplete from "@material-ui/lab/Autocomplete";
 
 const AddNewRecipe = (props) => {
   const [recipeName, setRecipeName] = useState("");
   const [directions, setDirections] = useState("");
-  const [ingredients, setIngredients] = useState([{}]);
+  const [existingIng, setExistingIng] = useState([]);
+  const [ingredients, setIngredients] = useState([]);
+  const [numIngredients, setNumIngredients] = useState(0);
+  const items = [];
 
-  const handleIngredient = (e, value) => {
-    
-    if (value) {
-      setIngredients([...ingredients, { id: value.id, name: value.name }]);
-    }
-  };
+  useEffect(() => {
+    fetch("http://localhost:8080/ingredients")
+    .then((res) => res.json())
+    .then((res) => setExistingIng(res));
+  }, [existingIng]);
 
-  const [numIngredients, setNumIngredients] = useState([
-    <IngredientSelect key={0} onChange={handleIngredient} />,
-  ]);
+  const handleIngredient = (index, event, value) => {
+    let arr = [...ingredients];
+    arr[index] = value.name;
+    setIngredients(arr);
+  }
+
+  for (let i = 0; i <= numIngredients; i++) {
+    items.push(
+      <AutoComplete key = {i} 
+      id = "ingredient"
+      options = {existingIng}
+      getOptionLabel={(option) => option.name}
+      getOptionSelected={(option, value) => option.name === value.name}
+      renderInput={(params) => <TextField {...params} label = "Ingredient" variant="outlined" />}
+      onChange = {(event, value) => handleIngredient(i, event, value)}
+      />
+    )
+  }
 
   const increaseIngredientCount = () => {
-    setNumIngredients([
-      ...numIngredients,
-      <IngredientSelect key={numIngredients.length} onChange={handleIngredient} />,
-    ]);
+    setNumIngredients(numIngredients + 1);
   };
 
   const decreaseIngredientCount = () => {
@@ -61,10 +76,8 @@ const AddNewRecipe = (props) => {
           label="Recipe Name"
           onChange={handleRecipeName}
         />
-        <div className="ingredient-list">
-          {numIngredients.map((item) => {
-            return item;
-          })}
+        <div style={{width: 200}}>
+          {items}
         </div>
         <Icon onClick={() => increaseIngredientCount()}>add_circle</Icon>
         <TextareaAutosize
