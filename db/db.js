@@ -33,8 +33,49 @@ const addNewIngredient = (name, type, res) => {
   res.send("Success!");
 };
 
+const addNewRecipe = (name, directions) => {
+  pool.query(
+    `INSERT INTO recipe (name, directions)
+    VALUES ($1, $2)`, [name, directions]
+  );
+  console.log(`Successfully added ${name} to the database`);
+}
+
+const resetRecipes = () => {
+  pool.query(
+    `DROP TABLE IF EXISTS recipe CASCADE;
+    CREATE TABLE recipe (
+      id SERIAL PRIMARY KEY NOT NULL,
+      name VARCHAR(255) NOT NULL,
+      directions TEXT NOT NULL
+    );
+    `
+  )
+}
+
+const resetIngredientList = () => {
+  pool.query(
+    `
+    DROP TABLE IF EXISTS ingredient_list CASCADE
+    CREATE TABLE ingredient_list (
+      id SERIAL PRIMARY KEY NOT NULL,
+      recipe_id INTEGER REFERENCES recipe(id) ON DELETE CASCADE,
+      ingredient_id INTEGER REFERENCES ingredient(id) ON DELETE CASCADE,
+      measurement VARCHAR(255)
+    );
+    `
+  );
+}
+
+const resetDB = () => {
+  resetRecipes();
+  resetIngredientList();
+}
+
 module.exports = {
   getAllTypes,
   addNewIngredient,
-  getAllIngredients
+  getAllIngredients,
+  addNewRecipe,
+  resetDB
 }

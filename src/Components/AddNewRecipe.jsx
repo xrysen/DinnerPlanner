@@ -24,7 +24,7 @@ const AddNewRecipe = (props) => {
   const handleIngredient = (index, event, value) => {
     let arr = [...ingredients];
     if (value) {
-      arr[index] = value.name;
+      arr[index] = value;
       setIngredients(arr);
     }
   };

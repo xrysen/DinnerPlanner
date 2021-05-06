@@ -15,8 +15,14 @@ app.get("/test", (req, res) => {
 
 app.get("/ingredients", db.getAllIngredients);
 
+app.get("/reset", (req, res) => {
+  db.resetDB();
+  res.send("Database reset");
+});
+
 app.post("/recipes", (req, res) => {
-  console.log(req.body.ingredients);
+  console.log(req.body.ingredients[0].id);
+  db.addNewRecipe(req.body.name, req.body.directions);
 });
 
 app.listen(PORT, () => {
