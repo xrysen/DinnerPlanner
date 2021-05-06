@@ -24,6 +24,10 @@ const getAllIngredients = (request, response) => {
   });
 }
 
+const getLastRecipeId = () => {
+  return pool.query('SELECT recipe.id FROM recipe ORDER BY id DESC LIMIT 1');
+}
+
 const addNewIngredient = (name, type, res) => {
   pool.query(
     `INSERT INTO ingredient (name, type_id) 
@@ -39,6 +43,15 @@ const addNewRecipe = (name, directions) => {
     VALUES ($1, $2)`, [name, directions]
   );
   console.log(`Successfully added ${name} to the database`);
+}
+
+const updateIngredientList = (recipeID, ingredientID, measurement) => {
+  pool.query(
+    `
+    INSERT INTO ingredient_list (recipe_id, ingredient_id, measurement)
+    VALUES ($1, $2, $3)
+    `, [recipeID, ingredientID, measurement]
+  )
 }
 
 const resetRecipes = () => {
@@ -77,5 +90,7 @@ module.exports = {
   addNewIngredient,
   getAllIngredients,
   addNewRecipe,
-  resetDB
+  resetDB,
+  getLastRecipeId,
+  updateIngredientList
 }

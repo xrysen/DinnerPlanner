@@ -21,8 +21,14 @@ app.get("/reset", (req, res) => {
 });
 
 app.post("/recipes", (req, res) => {
-  console.log(req.body.ingredients[0].id);
+  console.log(req.body.measurements[0]);
   db.addNewRecipe(req.body.name, req.body.directions);
+  db.getLastRecipeId()
+  .then(res => {
+    if (res.rows[0].id) {
+      db.updateIngredientList(res.rows[0].id, req.body.ingredients[0].id, req.body.measurements[0]);
+    }
+  })
 });
 
 app.listen(PORT, () => {
