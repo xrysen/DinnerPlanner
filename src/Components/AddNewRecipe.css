@@ -1,8 +1,13 @@
 .form-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  width: 40vw;
+  height: 80vh;
+  background-color: #f8edeb;
+  margin-top: 10vh;
+  border-radius: 10px;
+  overflow-y: scroll;
 }
 
 .ingredient-list {
