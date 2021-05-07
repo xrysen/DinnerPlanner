@@ -35,6 +35,10 @@ const getRecipeById = (id) => {
   WHERE recipe.id = ${id}`);
 }
 
+const getRecipeDirectionsById = (id) => {
+  return pool.query(`SELECT directions FROM direction WHERE recipe_id = ${id}`);
+}
+
 const addNewIngredient = (name, type, res) => {
   pool.query(
     `INSERT INTO ingredient (name, type_id) 
@@ -121,5 +125,6 @@ module.exports = {
   getLastRecipeId,
   updateIngredientList,
   getRecipeById,
-  updateDirections
+  updateDirections,
+  getRecipeDirectionsById
 }

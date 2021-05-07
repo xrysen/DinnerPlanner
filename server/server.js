@@ -26,6 +26,12 @@ app.get("/recipes/:id", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+app.get("/directions/:id", (req, res) => {
+  db.getRecipeDirectionsById(req.params.id)
+  .then((result) => res.send(result.rows))
+  .catch((err) => console.log(err));
+})
+
 app.post("/recipes", (req, res) => {
   db.addNewRecipe(req.body.name, req.body.directions);
   db.getLastRecipeId().then((res) => {
