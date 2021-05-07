@@ -44,10 +44,10 @@ const addNewIngredient = (name, type, res) => {
   res.send("Success!");
 };
 
-const addNewRecipe = (name, directions) => {
+const addNewRecipe = (name) => {
   pool.query(
-    `INSERT INTO recipe (name, directions)
-    VALUES ($1, $2)`, [name, directions]
+    `INSERT INTO recipe (name)
+    VALUES ($1)`, [name]
   );
   console.log(`Successfully added ${name} to the database`);
 }
@@ -58,6 +58,15 @@ const updateIngredientList = (recipeID, ingredientID, measurement) => {
     INSERT INTO ingredient_list (recipe_id, ingredient_id, measurement)
     VALUES ($1, $2, $3)
     `, [recipeID, ingredientID, measurement]
+  )
+}
+
+const updateDirections = (recipeID, direction) => {
+  pool.query(
+    `
+    INSERT INTO direction (recipe_id, directions)
+    VALUES ($1, $2)
+    `, [recipeID, direction]
   )
 }
 
@@ -100,5 +109,6 @@ module.exports = {
   resetDB,
   getLastRecipeId,
   updateIngredientList,
-  getRecipeById
+  getRecipeById,
+  updateDirections
 }

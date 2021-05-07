@@ -137,18 +137,18 @@ const AddNewRecipe = (props) => {
       ingredients: ingredients,
     };
     event.preventDefault();
-    // fetch("http://localhost:8080/recipes", {
-    //   method: "POST",
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Accept': 'application/json',
-    //   },
-    //   body: JSON.stringify(obj),
-    //   mode: 'cors'
-    // })
-    // .then(response => response.json())
-    // .then(data => { console.log("Success", data)})
-    // .catch((error) => console.log(error));
+    fetch("http://localhost:8080/recipes", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify(obj),
+      mode: 'cors'
+    })
+    .then(response => response.json())
+    .then(data => { console.log("Success", data)})
+    .catch((error) => console.log(error));
     console.log(obj);
   };
 

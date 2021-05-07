@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS direction CASCADE;
 
 CREATE TABLE direction (
   id SERIAL PRIMARY KEY NOT NULL,
+  directions TEXT NOT NULL,
   recipe_id INTEGER REFERENCES recipe(id) ON DELETE CASCADE
 );
 
