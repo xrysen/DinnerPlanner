@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       {/* <AddNewRecipe />   */}
-      <ViewRecipe id ="1" />
+      <ViewRecipe id ="2" />
     </div>
   );
 }

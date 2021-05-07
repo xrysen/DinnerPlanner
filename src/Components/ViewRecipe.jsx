@@ -5,11 +5,13 @@ const ViewRecipe = (props) => {
   const [data, setData] = useState([]);
   const [directions, setDirections] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [recipeLoaded, setRecipeLoaded] = useState(false);
 
   useEffect(() => {
     fetch(`http://localhost:8080/recipes/${props.id}`).then((res) =>
       res.json().then((result) => {
         setData(result);
+        setRecipeLoaded(true);
       })
     );
     fetch(`http://localhost:8080/directions/${props.id}`).then((res) => {
@@ -20,7 +22,7 @@ const ViewRecipe = (props) => {
     });
   }, [props.id, data]);
 
-  if (isLoaded) {
+  if (isLoaded && recipeLoaded) {
     return (
       <div className="recipe-container">
         <h1>{data[0].name}</h1>
