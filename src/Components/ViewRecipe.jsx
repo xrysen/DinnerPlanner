@@ -46,6 +46,7 @@ const ViewRecipe = (props) => {
             })}
           </ol>
         </div>
+        <div onClick={props.back}>Back</div>
       </div>
     );
   }
