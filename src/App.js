@@ -5,8 +5,8 @@ import ViewRecipe from "./Components/ViewRecipe";
 function App() {
   return (
     <div className="App">
-      <AddNewRecipe />  
-      {/* <ViewRecipe name = "Quinoa Fried Rice with Sticky Spiced Chicken" id ="1" /> */}
+      {/* <AddNewRecipe />   */}
+      <ViewRecipe id ="2" />
     </div>
   );
 }

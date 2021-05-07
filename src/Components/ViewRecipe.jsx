@@ -18,16 +18,19 @@ const ViewRecipe = (props) => {
     return (
       <div className="recipe-container">
         <h1>{data[0].name}</h1>
-        <div className="ingredients">
-          <h3>Ingredients</h3>
+        <h3 style={{textAlign: "left"}}>Ingredients</h3>
+        <div className="ingredients" id="ingredients">
           <ul>
+
             {data.map((item) => {
               return (
                 <li key={item.ingredient_id}>
-                  {item.measurement} {item.ingredient}
+                  {item.ingredient}
+                  - {item.measurement}
                 </li>
               );
             })}
+            
           </ul>
         </div>
         <div className="directions">

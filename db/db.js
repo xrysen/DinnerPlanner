@@ -29,7 +29,7 @@ const getLastRecipeId = () => {
 }
 
 const getRecipeById = (id) => {
-  return pool.query(`SELECT recipe.id, recipe.name, recipe.directions, ingredient_list.ingredient_id, ingredient_list.measurement, ingredient.name AS ingredient FROM recipe 
+  return pool.query(`SELECT recipe.id, recipe.name, ingredient_list.ingredient_id, ingredient_list.measurement, ingredient.name AS ingredient FROM recipe 
   JOIN ingredient_list ON recipe.id = recipe_id
   JOIN ingredient ON ingredient_list.ingredient_id = ingredient.id
   WHERE recipe.id = ${id}`);
@@ -75,10 +75,20 @@ const resetRecipes = () => {
     `DROP TABLE IF EXISTS recipe CASCADE;
     CREATE TABLE recipe (
       id SERIAL PRIMARY KEY NOT NULL,
-      name VARCHAR(255) NOT NULL,
-      directions TEXT NOT NULL
+      name VARCHAR(255) NOT NULL
     );
     `
+  )
+}
+
+const resetDirections = () => {
+  pool.query(
+    `DROP TABLE IF EXISTS direction CASCADE;
+    CREATE TABLE direction (
+      id SERIAL PRIMARY KEY NOT NULL,
+      directions TEXT NOT NULL,
+      recipe_id INTEGER REFERENCES recipe(id) ON DELETE CASCADE
+    );`
   )
 }
 
@@ -98,6 +108,7 @@ const resetIngredientList = () => {
 
 const resetDB = () => {
   resetRecipes();
+  resetDirections();
   resetIngredientList();
 }
 
