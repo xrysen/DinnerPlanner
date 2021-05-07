@@ -1,6 +1,5 @@
 import TextField from "@material-ui/core/TextField";
 import Icon from "@material-ui/core/Icon";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import "./AddNewRecipe.css";
 import { useState, useEffect } from "react";
 import AutoComplete from "@material-ui/lab/Autocomplete";
