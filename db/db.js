@@ -28,6 +28,13 @@ const getLastRecipeId = () => {
   return pool.query('SELECT recipe.id FROM recipe ORDER BY id DESC LIMIT 1');
 }
 
+const getRecipeById = (id) => {
+  return pool.query(`SELECT recipe.id, recipe.name, recipe.directions, ingredient_list.ingredient_id, ingredient_list.measurement, ingredient.name AS ingredient FROM recipe 
+  JOIN ingredient_list ON recipe.id = recipe_id
+  JOIN ingredient ON ingredient_list.ingredient_id = ingredient.id
+  WHERE recipe.id = ${id}`);
+}
+
 const addNewIngredient = (name, type, res) => {
   pool.query(
     `INSERT INTO ingredient (name, type_id) 
@@ -92,5 +99,6 @@ module.exports = {
   addNewRecipe,
   resetDB,
   getLastRecipeId,
-  updateIngredientList
+  updateIngredientList,
+  getRecipeById
 }

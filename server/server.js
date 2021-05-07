@@ -20,6 +20,12 @@ app.get("/reset", (req, res) => {
   res.send("Database reset");
 });
 
+app.get("/recipes/:id", (req, res) => {
+    db.getRecipeById(req.params.id)
+    .then((result) => res.send(result.rows))
+    .catch((err) => console.log(err));
+});
+
 app.post("/recipes", (req, res) => {
   db.addNewRecipe(req.body.name, req.body.directions);
   db.getLastRecipeId().then((res) => {
