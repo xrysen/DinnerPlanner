@@ -10,10 +10,12 @@ const AddNewRecipe = (props) => {
   const [recipeName, setRecipeName] = useState("");
   const [directions, setDirections] = useState([]);
   const [existingIng, setExistingIng] = useState([]);
-  const [ingredients, setIngredients] = useState([{
-    ingredient: "",
-    measurement: ""
-  }]);
+  const [ingredients, setIngredients] = useState([
+    {
+      ingredient: "",
+      measurement: "",
+    },
+  ]);
   const [numIngredients, setNumIngredients] = useState(0);
   const [numDirections, setNumDirections] = useState(0);
   const items = [];
@@ -50,7 +52,16 @@ const AddNewRecipe = (props) => {
   };
 
   for (let i = 0; i <= numDirections; i++) {
-    directionText.push(<TextField style = {{ marginTop: "20px" }} id = "standard-basic" label="Direction" variant="outlined" fullWidth onChange={(event) => handleDirection(i, event)}/>);
+    directionText.push(
+      <TextField
+        style={{ marginTop: "20px" }}
+        id="standard-basic"
+        label="Direction"
+        variant="outlined"
+        fullWidth
+        onChange={(event) => handleDirection(i, event)}
+      />
+    );
   }
 
   for (let i = 0; i <= numIngredients; i++) {
@@ -93,19 +104,19 @@ const AddNewRecipe = (props) => {
     let arr = [...directions];
     arr.push("");
     setDirections(arr);
-  }
+  };
 
   const decreaseDirectionCount = () => {
     let arr = [...directions];
     arr.pop();
     setDirections(arr);
     setNumDirections(numDirections - 1);
-  }
+  };
 
   const increaseIngredientCount = () => {
     setNumIngredients(numIngredients + 1);
     let arr = [...ingredients];
-    arr.push({ ingredient: "", measurement: ""});
+    arr.push({ ingredient: "", measurement: "" });
     setIngredients(arr);
   };
 
@@ -124,8 +135,8 @@ const AddNewRecipe = (props) => {
     let obj = {
       name: recipeName,
       directions: directions,
-      ingredients: ingredients
-    }
+      ingredients: ingredients,
+    };
     event.preventDefault();
     // fetch("http://localhost:8080/recipes", {
     //   method: "POST",
@@ -152,7 +163,7 @@ const AddNewRecipe = (props) => {
           onChange={handleRecipeName}
           variant="outlined"
           required
-          style = {{ marginTop: "20px" }}
+          style={{ marginTop: "20px" }}
         />
         <div className="ingredient-list">{items}</div>
         <div className="icons">
@@ -172,7 +183,7 @@ const AddNewRecipe = (props) => {
             remove
           </Icon>
         </div>
-        <input style={{marginTop: "20px"}} type="submit" value="Submit" />
+        <input style={{ marginTop: "20px" }} type="submit" value="Submit" />
       </form>
     </div>
   );
