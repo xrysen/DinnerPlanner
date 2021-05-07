@@ -22,7 +22,7 @@ const ViewRecipe = (props) => {
     });
   }, [props.id, data]);
 
-  if (isLoaded && recipeLoaded) {
+  if (isLoaded && recipeLoaded && data.length > 0) {
     return (
       <div className="recipe-container">
         <h1>{data[0].name}</h1>
@@ -48,6 +48,10 @@ const ViewRecipe = (props) => {
         </div>
       </div>
     );
+  }
+
+  else if (isLoaded && recipeLoaded && data.length === 0) {
+    return <h1>Recipe Not Found :(</h1>
   }
 
   return <h1>Loading</h1>;
