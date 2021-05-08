@@ -1,4 +1,6 @@
 import "./ViewRecipe.css";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Link from "@material-ui/core/Link";
 import { useEffect, useState } from "react";
 
 const ViewRecipe = (props) => {
@@ -17,7 +19,10 @@ const ViewRecipe = (props) => {
     fetch(`http://localhost:8080/directions/${props.id}`).then((res) => {
       res.json().then((result) => {
         setDirections(result);
-        setIsLoaded(true);
+        setTimeout(() => {
+
+          setIsLoaded(true);
+        }, 500);
       });
     });
   }, [props.id, data]);
@@ -40,22 +45,22 @@ const ViewRecipe = (props) => {
           <h3>Directions:</h3>
           <ol>
             {directions.map((item) => {
-              return (
-                <li key = {item.directions}>{item.directions}</li>
-              )
+              return <li key={item.directions}>{item.directions}</li>;
             })}
           </ol>
         </div>
-        <div onClick={props.back}>Back</div>
+        <Link component = "button" onClick={props.back}>Back</Link>
       </div>
     );
+  } else if (isLoaded && recipeLoaded && data.length === 0) {
+    return <h1>Recipe Not Found :(</h1>;
   }
 
-  else if (isLoaded && recipeLoaded && data.length === 0) {
-    return <h1>Recipe Not Found :(</h1>
-  }
-
-  return <h1>Loading</h1>;
+  return (
+    <div className="recipe-container">
+      <CircularProgress />
+    </div>
+  );
 };
 
 export default ViewRecipe;

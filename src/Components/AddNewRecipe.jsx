@@ -137,7 +137,7 @@ const AddNewRecipe = (props) => {
       ingredients: ingredients,
     };
     event.preventDefault();
-    fetch("http://localhost:8080/recipes", {
+    fetch(`http://localhost:8080/recipes`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
