@@ -36,7 +36,7 @@ INSERT INTO ingredient (name, type_id) VALUES('Taco Seasoning', 1);
 INSERT INTO ingredient (name, type_id) VALUES('Water', 7);
 INSERT INTO ingredient (name, type_id) VALUES('Refried Beans', 3);
 
-INSERT INTO recipe (name) VALUES ('Quinoa Fried Rice with Sticky Spiced Chicken');
+INSERT INTO recipe (name, category_id) VALUES ('Quinoa Fried Rice with Sticky Spiced Chicken', 3);
 
 INSERT INTO direction (directions, recipe_id) VALUES ('Season chicken with 5 spice and salt', 1);
 INSERT INTO direction (directions, recipe_id) VALUES ('Cook in oil 5-7 minutes each side', 1);
@@ -67,7 +67,7 @@ INSERT INTO ingredient_list (recipe_id, ingredient_id, measurement) VALUES(1, 16
 INSERT INTO ingredient_list (recipe_id, ingredient_id, measurement) VALUES(1, 17, '2-3 tbs');
 INSERT INTO ingredient_list (recipe_id, ingredient_id, measurement) VALUES(1, 18, '2-3 tbs');
 
-INSERT INTO recipe (name) VALUES ('Burritos');
+INSERT INTO recipe (name, category_id) VALUES ('Burritos', 3);
 
 INSERT INTO direction (directions, recipe_id) VALUES ('Cook Onion and Garlic on medium heat until transparent', 2);
 INSERT INTO direction (directions, recipe_id) VALUES ('Add meat, cook until browned', 2);
