@@ -6,6 +6,12 @@ INSERT INTO food_type (name) VALUES ('Grain');
 INSERT INTO food_type (name) VALUES ('Fruit');
 INSERT INTO food_type (name) VALUES ('Liquid');
 
+INSERT INTO category (name) VALUES ('Breakfast');
+INSERT INTO category (name) VALUES ('Lunch');
+INSERT INTO category (name) VALUES ('Dinner');
+INSERT INTO category (name) VALUES ('Dessert');
+INSERT INTO category (name) VALUES ('Snack');
+
 INSERT INTO ingredient (name, type_id) VALUES('Quinoa', 5);
 INSERT INTO ingredient (name, type_id) VALUES('Red Onion', 3);
 INSERT INTO ingredient (name, type_id) VALUES('Red Bell Pepper', 3);
