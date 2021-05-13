@@ -49,7 +49,6 @@ const ViewRecipe = (props) => {
             })}
           </ol>
         </div>
-        <Link component = "button" onClick={props.back}>Back</Link>
       </div>
     );
   } else if (isLoaded && recipeLoaded && data.length === 0) {

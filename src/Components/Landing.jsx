@@ -5,12 +5,14 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
+import ViewRecipe from "./ViewRecipe";
 
 const Landing = () => {
   const [catLoaded, setCatloaded] = useState(false);
   const [categories, setCategories] = useState([]);
   const [recipes, setRecipes] = useState([]);
   const [currCat, setCurrCat] = useState(1);
+  const [currRec, setCurrRec] = useState("");
 
   useEffect(() => {
     fetch(`http://localhost:8080/categories`)
@@ -30,6 +32,10 @@ const Landing = () => {
   const handleCategory = (index) => {
     setCurrCat(index);
   };
+
+  const handleClick = (index) => {
+    setCurrRec(index);
+  }
 
   return (
     <div className="landing-container">
@@ -62,12 +68,16 @@ const Landing = () => {
             <Grid item md={5}>
               {recipes
                 ? recipes.map((item) => {
-                    return <Button>{item.name}</Button>;
+                    return (
+                      <div>
+                        <Button onClick={()=> handleClick(item.id)}>{item.name}</Button>
+                      </div>
+                    );
                   })
                 : ""}
             </Grid>
-            <Grid item md={5} style={{ backgroundColor: "green" }}>
-              <h2>Testing 3</h2>
+            <Grid item md={5}>
+              <ViewRecipe id = {currRec}/>
             </Grid>
           </Grid>
         </Container>

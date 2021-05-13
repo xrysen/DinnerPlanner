@@ -3,15 +3,7 @@ body {
 }
 
 .recipe-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 70vw;
-  height: 80vh;
-  background-color: #f8edeb;
-  margin-top: 10vh;
-  border-radius: 10px;
+  
 }
 
 h1 {

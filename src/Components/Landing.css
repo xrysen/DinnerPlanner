@@ -1,11 +1,11 @@
 .landing-container {
   margin-top: 75px;
   width: 90vw;
-  height: 100vh;
+  
   background-color: #f8edeb;
   border: 10px solid #ffb5a7;
   border-radius: 10px;
-  overflow: hidden;
+  
 }
 
 .hero-banner {
