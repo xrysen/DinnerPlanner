@@ -20,7 +20,6 @@ const ViewRecipe = (props) => {
       res.json().then((result) => {
         setDirections(result);
         setTimeout(() => {
-
           setIsLoaded(true);
         }, 500);
       });
@@ -29,25 +28,27 @@ const ViewRecipe = (props) => {
 
   if (isLoaded && recipeLoaded && data.length > 0) {
     return (
-      <div className="recipe-container">
+      <div>
         <h1>{data[0].name}</h1>
-        <h3 style={{ textAlign: "left" }}>Ingredients</h3>
-        <div className="ingredients" id="ingredients">
-          {data.map((item) => {
-            return (
-              <span>
-                {item.measurement} - {item.ingredient}
-              </span>
-            );
-          })}
-        </div>
-        <div className="directions">
-          <h3>Directions:</h3>
-          <ol>
-            {directions.map((item) => {
-              return <li key={item.directions}>{item.directions}</li>;
+        <h3 style={{width: "30%"}}>Ingredients</h3>
+        <div className="recipe-container">
+          <div className="ingredients" id="ingredients">
+            {data.map((item) => {
+              return (
+                <span>
+                  {item.measurement} - {item.ingredient}
+                </span>
+              );
             })}
-          </ol>
+          </div>
+          <div className="directions">
+            <h3>Directions:</h3>
+            <ol>
+              {directions.map((item) => {
+                return <li key={item.directions}>{item.directions}</li>;
+              })}
+            </ol>
+          </div>
         </div>
       </div>
     );

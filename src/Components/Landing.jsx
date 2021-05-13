@@ -15,19 +15,13 @@ const Landing = () => {
   const [currRec, setCurrRec] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:8080/categories`)
-      .then((res) => res.json())
-      .then((res) => {
-        setCategories(res);
-        setCatloaded(true);
-      });
 
-    fetch(`http://localhost:8080/categories/${currCat}`)
+    fetch(`http://localhost:8080/recipes`)
       .then((res) => res.json())
       .then((res) => {
         setRecipes(res);
       });
-  }, [currCat]);
+  }, []);
 
   const handleCategory = (index) => {
     setCurrCat(index);
@@ -46,37 +40,22 @@ const Landing = () => {
       </Box>
       <Box>
         <Container>
-          <Grid container spacing={3}>
-            <Grid item md={2}>
+          <Grid container spacing={2}>
+            
+            <Grid item md={6}>
               <h3>Recipes</h3>
-              {catLoaded
-                ? categories.map((item) => {
-                    return (
-                      <div className="menu-button">
-                        <Button
-                          onClick={() => handleCategory(item.id)}
-                          variant="outlined"
-                          color="primary"
-                        >
-                          {item.name}
-                        </Button>
-                      </div>
-                    );
-                  })
-                : ""}
-            </Grid>
-            <Grid item md={5}>
               {recipes
                 ? recipes.map((item) => {
-                    return (
-                      <div>
+                  return (
+                    <div>
                         <Button onClick={()=> handleClick(item.id)}>{item.name}</Button>
                       </div>
                     );
                   })
-                : ""}
+                  : ""}
+                <Button>Add New Recipe</Button>  
             </Grid>
-            <Grid item md={5}>
+            <Grid item md={6}>
               <ViewRecipe id = {currRec}/>
             </Grid>
           </Grid>

@@ -3,7 +3,9 @@ body {
 }
 
 .recipe-container {
-  
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
 h1 {
@@ -11,7 +13,7 @@ h1 {
 }
 
 .ingredients {
-  margin-left: 20px;
+  
   width: 90%;
   height: 20%;
   display: flex;
@@ -21,7 +23,7 @@ h1 {
 }
 
 .directions {
-  width: 80%;
+  margin-top: -60px;
   
 }
 
