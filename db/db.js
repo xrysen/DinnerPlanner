@@ -42,6 +42,10 @@ const getAllRecipes = () => {
   return pool.query(`SELECT * FROM recipe;`);
 }
 
+const getRecipesByCat = (catId) => {
+  return pool.query(`SELECT * FROM recipe WHERE category_id = $1`, [catId]);
+}
+
 const addNewIngredient = (name, type, res) => {
   pool.query(
     `INSERT INTO ingredient (name, type_id) 
@@ -80,6 +84,12 @@ const updateDirections = (recipeID, direction) => {
     [recipeID, direction]
   );
 };
+
+const getCategories = () => {
+ return pool.query(
+    `SELECT * FROM category;`
+  )
+}
 
 const resetRecipes = () => {
   pool.query(
@@ -134,5 +144,7 @@ module.exports = {
   getRecipeById,
   updateDirections,
   getRecipeDirectionsById,
-  getAllRecipes
+  getAllRecipes,
+  getCategories,
+  getRecipesByCat
 };

@@ -37,6 +37,16 @@ app.get("/recipes", (req, res) => {
   .then((result) => res.send(result.rows));
 })
 
+app.get("/categories", (req, res) => {
+  db.getCategories()
+  .then((result) => res.status(200).send(result.rows));
+})
+
+app.get("/categories/:id", (req, res) => {
+  db.getRecipesByCat(req.params.id)
+  .then((result) => res.status(200).send(result.rows));
+})
+
 app.post("/recipes", (req, res) => {
   db.addNewRecipe(req.body.name, req.body.directions);
   db.getLastRecipeId().then((res) => {
