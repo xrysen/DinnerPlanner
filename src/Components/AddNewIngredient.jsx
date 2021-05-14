@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import Paper from "@material-ui/core/Paper";
 import "./AddNewIngredient.css";
+import TextField from "@material-ui/core/TextField";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 
 const AddNewIngredient = (props) => {
   const [options, setOptions] = useState([]);
@@ -43,34 +46,43 @@ const AddNewIngredient = (props) => {
         console.log("Success", data);
       })
       .catch((error) => console.log(error));
-      props.close();
+    props.close();
   };
 
   return (
-      <Paper className="modal-content">
-        <h1>Add New Ingredient</h1>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            onChange={(event) => handleInput(event)}
-            placeholder="Ingredient name"
-          />
-          <select onChange={(event) => handleChange(event)}>
-            <option defaultValue value="">
-              Select Category
-            </option>
-            {options.map((item) => {
-              return (
-                <option key={item.id} value={item.id}>
-                  {item.name}
-                </option>
-              );
-            })}
-          </select>
-          <br />
-          <input type="submit" />
-        </form>
-      </Paper>
+    <Paper className="modal-content">
+      <h1>Add New Ingredient</h1>
+      <form onSubmit={handleSubmit}>
+        <TextField
+          id="standard-basic"
+          label="Ingredient Name"
+          onChange={(event) => handleInput(event)}
+          variant="outlined"
+          required
+        />
+        <Select
+          value={category}
+          onChange={(event) => handleChange(event)}
+          style={{ width: "200px" }}
+          variant="outlined"
+        >
+          <MenuItem defaultValue value="">
+            Select Category
+          </MenuItem>
+          {options.map((item) => {
+            return (
+              <MenuItem key={item.id} value={item.id}>
+                {item.name}
+              </MenuItem>
+            );
+          })}
+        </Select>
+        <br />
+        <input type="submit" />
+        <br />
+        <button onClick={props.close}>Close</button>
+      </form>
+    </Paper>
   );
 };
 
