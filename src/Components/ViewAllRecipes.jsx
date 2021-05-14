@@ -15,6 +15,8 @@ const ViewAllRecipes = (props) => {
       });
   });
 
+  if (isLoaded) { }
+
   return (
     <div className="recipe-container">
       <h1>Pick Recipe</h1>

@@ -9,10 +9,7 @@ import ViewRecipe from "./ViewRecipe";
 import NavBar from "./NavBar";
 
 const Landing = () => {
-  const [catLoaded, setCatloaded] = useState(false);
-  const [categories, setCategories] = useState([]);
   const [recipes, setRecipes] = useState([]);
-  const [currCat, setCurrCat] = useState(1);
   const [currRec, setCurrRec] = useState("");
 
   useEffect(() => {
@@ -23,10 +20,6 @@ const Landing = () => {
         setRecipes(res);
       });
   }, []);
-
-  const handleCategory = (index) => {
-    setCurrCat(index);
-  };
 
   const handleClick = (index) => {
     setCurrRec(index);

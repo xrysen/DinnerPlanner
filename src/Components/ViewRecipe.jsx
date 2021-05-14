@@ -1,6 +1,5 @@
 import "./ViewRecipe.css";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Link from "@material-ui/core/Link";
 import { useEffect, useState } from "react";
 
 const ViewRecipe = (props) => {
