@@ -162,7 +162,7 @@ const AddNewRecipe = (props) => {
   };
 
   return (
-    <div style={{ textAlign: "center" }}>
+    <div className = "new-recipe.container">
       <h1>Add New Recipe</h1>
       <form className="form-container" onSubmit={handleSubmit}>
         <TextField

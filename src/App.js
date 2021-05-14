@@ -2,16 +2,12 @@ import "./App.css";
 import AddNewRecipe from "./Components/AddNewRecipe";
 import { useState } from "react";
 import ViewRecipes from "./Components/ViewRecipes";
-import { ViewContext } from "./Contexts/ViewContext";
-import ShowIngredients from "./Components/ShowIngredients";
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
 import NavBar from "./Components/NavBar";
 
 function App() {
-  const [view, setView] = useState("Landing");
+  const [view, setView] = useState("View Recipes");
   const [id, setId] = useState(0);
 
   const changeView = (view, id) => {
@@ -26,9 +22,10 @@ function App() {
           <Paper>
             <h1 style={{ padding: "30px" }}>Dinner Planner</h1>
           </Paper>
-          <NavBar />
+          <NavBar addRecipe = {()=> changeView("Add Recipe")} viewRecipes = {()=> changeView("View Recipes")} />
         </Box>
-        {view === "Landing" && (<ViewRecipes />)};
+        {view === "View Recipes" && (<ViewRecipes  />)}
+        {view === "Add Recipe" && (<AddNewRecipe />)}
       </div>
     </div>
   );
