@@ -14,6 +14,9 @@ app.get("/test", (req, res) => {
 });
 
 app.get("/ingredients", db.getAllIngredients);
+app.post("/ingredients", (req, res) => {
+  db.addNewIngredient(req.body.name, req.body.category, res);
+})
 
 app.get("/reset", (req, res) => {
   db.resetDB();
