@@ -24,7 +24,7 @@ function App() {
           </Paper>
           <NavBar addRecipe = {()=> changeView("Add Recipe")} viewRecipes = {()=> changeView("View Recipes")} />
         </Box>
-        {view === "View Recipes" && (<ViewRecipes  />)}
+        {view === "View Recipes" && (<ViewRecipes addNew = {()=> changeView("Add Recipe")}  />)}
         {view === "Add Recipe" && (<AddNewRecipe />)}
       </div>
     </div>

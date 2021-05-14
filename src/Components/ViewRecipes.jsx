@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
 import ViewRecipe from "./ViewRecipe";
 
-const ViewRecipes = () => {
+const ViewRecipes = (props) => {
   const [recipes, setRecipes] = useState([]);
   const [currRec, setCurrRec] = useState("");
 
@@ -40,7 +40,7 @@ const ViewRecipes = () => {
                     );
                   })
                 : ""}
-              <Button>Add New Recipe</Button>
+              <Button onClick = {props.addNew}>Add New Recipe</Button>
             </Grid>
             <Grid item md={6}>
               <ViewRecipe id={currRec} />
