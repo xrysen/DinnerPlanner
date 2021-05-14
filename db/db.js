@@ -91,6 +91,10 @@ const getCategories = () => {
   )
 }
 
+const getFoodTypes = () => {
+  return pool.query("SELECT * FROM food_type;");
+}
+
 const resetRecipes = () => {
   pool.query(
     `DROP TABLE IF EXISTS recipe CASCADE;
@@ -146,5 +150,6 @@ module.exports = {
   getRecipeDirectionsById,
   getAllRecipes,
   getCategories,
-  getRecipesByCat
+  getRecipesByCat,
+  getFoodTypes
 };

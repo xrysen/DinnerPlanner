@@ -5,6 +5,7 @@ import ViewAllRecipes from "./Components/ViewAllRecipes";
 import { useState } from "react";
 import Landing from "./Components/Landing";
 import { ViewContext } from "./Contexts/ViewContext";
+import AddNewIngredient from "./Components/AddNewIngredient";
 
 function App() {
   const [view, setView] = useState("Landing");
@@ -20,11 +21,12 @@ function App() {
   return (
     <div className="App">
       {/* <AddNewRecipe />   */}
-      {view === "Recipe Detail" && ( <ViewRecipe id ={id} /> ) }
+      {/* {view === "Recipe Detail" && ( <ViewRecipe id ={id} /> ) }
       {view === "View All" && ( <ViewAllRecipes onClick = {changeView} /> ) }
       <ViewContext.Provider value={{view, setView}}>
         {view === "Landing" && (<Landing />)}
-      </ViewContext.Provider>
+      </ViewContext.Provider> */}
+      <AddNewIngredient />
     </div>
   );
 }

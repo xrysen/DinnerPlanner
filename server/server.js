@@ -65,6 +65,11 @@ app.post("/recipes", (req, res) => {
   });
 });
 
+app.get("/food_types", (req, res) => {
+  db.getFoodTypes()
+  .then((result) => res.status(200).send(result.rows));
+});
+
 app.listen(PORT, () => {
   console.log("Server started listening on port " + PORT);
 });
