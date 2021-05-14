@@ -1,0 +1,17 @@
+.navbar {
+  width: 100%;
+  height: 50px;
+  background-color: white;
+  position: relative;
+  top: 128px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  color: black;
+}
+
+.nav-item {
+  position: relative;
+  bottom: 10px;
+}

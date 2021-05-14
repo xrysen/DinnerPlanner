@@ -4,10 +4,13 @@ import ViewRecipe from "./Components/ViewRecipe";
 import ViewAllRecipes from "./Components/ViewAllRecipes";
 import { useState } from "react";
 import Landing from "./Components/Landing";
+import { ViewContext } from "./Contexts/ViewContext";
 
 function App() {
-  const [view, setView] = useState("Landing");
+  const [view, setView] = useState("Testing");
   const [id, setId] = useState(0);
+
+
   
   const changeView = (view, id) => {
     setView(view);
@@ -17,9 +20,11 @@ function App() {
   return (
     <div className="App">
       {/* <AddNewRecipe />   */}
-      {view === "Recipe Detail" && ( <ViewRecipe id ={id} back = {() => setView("View All", 0)} /> ) }
+      {view === "Recipe Detail" && ( <ViewRecipe id ={id} /> ) }
       {view === "View All" && ( <ViewAllRecipes onClick = {changeView} /> ) }
-      {view === "Landing" && (<Landing />)}
+      <ViewContext.Provider value={{view, setView}}>
+        {view === "Landing" && (<Landing />)}
+      </ViewContext.Provider>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
 import ViewRecipe from "./ViewRecipe";
+import NavBar from "./NavBar";
 
 const Landing = () => {
   const [catLoaded, setCatloaded] = useState(false);
@@ -35,8 +36,9 @@ const Landing = () => {
     <div className="landing-container">
       <Box className="hero-banner">
         <Paper>
-          <h1 style={{ padding: "30px" }}>Meal Planner</h1>
+          <h1 style={{ padding: "30px" }}>Dinner Planner</h1>
         </Paper>
+        <NavBar />
       </Box>
       <Box>
         <Container>
