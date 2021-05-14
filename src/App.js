@@ -20,13 +20,13 @@ function App() {
 
   return (
     <div className="App">
-      {/* <AddNewRecipe />   */}
+      <AddNewRecipe />  
       {/* {view === "Recipe Detail" && ( <ViewRecipe id ={id} /> ) }
       {view === "View All" && ( <ViewAllRecipes onClick = {changeView} /> ) }
       <ViewContext.Provider value={{view, setView}}>
         {view === "Landing" && (<Landing />)}
       </ViewContext.Provider> */}
-      <AddNewIngredient />
+      {/* <AddNewIngredient /> */}
     </div>
   );
 }

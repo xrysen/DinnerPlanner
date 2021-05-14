@@ -4,8 +4,11 @@ import "./AddNewRecipe.css";
 import { useState, useEffect } from "react";
 import AutoComplete from "@material-ui/lab/Autocomplete";
 import Button from "@material-ui/core/Button";
+import AddNewIngredient from "./AddNewIngredient";
+import Modal from "@material-ui/core/Modal";
 
 const AddNewRecipe = (props) => {
+  const [open, setOpen] = useState(false);
   const [recipeName, setRecipeName] = useState("");
   const [directions, setDirections] = useState([]);
   const [existingIng, setExistingIng] = useState([]);
@@ -33,6 +36,10 @@ const AddNewRecipe = (props) => {
       setIngredients(arr);
     }
   };
+
+  const handleModal = () => {
+    open ? setOpen(false) : setOpen(true);
+  }
 
   const handleMeasurement = (index, event) => {
     let arr = [...ingredients];
@@ -81,7 +88,7 @@ const AddNewRecipe = (props) => {
             <Button
               variant="outlined"
               color="primary"
-              onMouseDown={() => console.log("Add new")}
+              onMouseDown={() => handleModal()}
             >
               Add New Ingredient
             </Button>
@@ -184,6 +191,9 @@ const AddNewRecipe = (props) => {
         </div>
         <input style={{ marginTop: "20px" }} type="submit" value="Submit" />
       </form>
+      <Modal open={open} className="modal">
+        <AddNewIngredient close = {handleModal} />
+      </Modal>
     </div>
   );
 };
