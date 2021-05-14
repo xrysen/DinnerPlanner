@@ -75,6 +75,12 @@ const updateIngredientList = (recipeID, ingredientID, measurement) => {
   );
 };
 
+const getIngredientsByType = (typeId) => {
+  return pool.query(
+    `SELECT * FROM ingredient WHERE type_id = $1`, [typeId]
+  )
+}
+
 const updateDirections = (recipeID, direction) => {
   pool.query(
     `
@@ -151,5 +157,6 @@ module.exports = {
   getAllRecipes,
   getCategories,
   getRecipesByCat,
-  getFoodTypes
+  getFoodTypes,
+  getIngredientsByType
 };

@@ -18,6 +18,11 @@ app.post("/ingredients", (req, res) => {
   db.addNewIngredient(req.body.name, req.body.category, res);
 })
 
+app.get("/ingredients/:typeId", (req, res) => {
+  db.getIngredientsByType(req.params.typeId)
+  .then ((result) => res.send(result.rows));
+})
+
 app.get("/reset", (req, res) => {
   db.resetDB();
   res.send("Database reset");
