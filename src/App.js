@@ -7,7 +7,7 @@ import Landing from "./Components/Landing";
 import { ViewContext } from "./Contexts/ViewContext";
 
 function App() {
-  const [view, setView] = useState("Testing");
+  const [view, setView] = useState("Landing");
   const [id, setId] = useState(0);
 
 

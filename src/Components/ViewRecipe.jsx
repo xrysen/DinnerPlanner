@@ -30,13 +30,13 @@ const ViewRecipe = (props) => {
     return (
       <div>
         <h1>{data[0].name}</h1>
-        <h3 style={{width: "30%"}}>Ingredients</h3>
+        <h3 style={{ width: "30%" }}>Ingredients</h3>
         <div className="recipe-container">
           <div className="ingredients" id="ingredients">
             {data.map((item) => {
               return (
                 <span>
-                  {item.measurement} - {item.ingredient}
+                  <strong>{item.measurement}</strong> - {item.ingredient}
                 </span>
               );
             })}
@@ -58,7 +58,7 @@ const ViewRecipe = (props) => {
 
   return (
     <div className="recipe-container">
-      <CircularProgress />
+      {props.id ? <CircularProgress /> : <h1>Please choose a recipe!</h1>}
     </div>
   );
 };
