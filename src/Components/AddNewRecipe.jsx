@@ -39,7 +39,7 @@ const AddNewRecipe = (props) => {
 
   const handleModal = () => {
     open ? setOpen(false) : setOpen(true);
-  }
+  };
 
   const handleMeasurement = (index, event) => {
     let arr = [...ingredients];
@@ -147,15 +147,17 @@ const AddNewRecipe = (props) => {
     fetch(`http://localhost:8080/recipes`, {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        "Content-Type": "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify(obj),
-      mode: 'cors'
+      mode: "cors",
     })
-    .then(response => response.json())
-    .then(data => { console.log("Success", data)})
-    .catch((error) => console.log(error));
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success", data);
+      })
+      .catch((error) => console.log(error));
     console.log(obj);
   };
 
@@ -192,7 +194,7 @@ const AddNewRecipe = (props) => {
         <input style={{ marginTop: "20px" }} type="submit" value="Submit" />
       </form>
       <Modal open={open} className="modal">
-        <AddNewIngredient close = {handleModal} />
+        <AddNewIngredient close={handleModal} />
       </Modal>
     </div>
   );

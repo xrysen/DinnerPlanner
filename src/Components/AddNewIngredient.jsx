@@ -4,6 +4,7 @@ import "./AddNewIngredient.css";
 import TextField from "@material-ui/core/TextField";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
+import InputLabel from "@material-ui/core/InputLabel";
 
 const AddNewIngredient = (props) => {
   const [options, setOptions] = useState([]);
@@ -60,15 +61,14 @@ const AddNewIngredient = (props) => {
           variant="outlined"
           required
         />
+        <InputLabel style = {{marginTop: "20px"}} id = "category-label">Select Category</InputLabel>
         <Select
+          labelId = "category-label"
           value={category}
           onChange={(event) => handleChange(event)}
           style={{ width: "200px" }}
           variant="outlined"
         >
-          <MenuItem defaultValue value="">
-            Select Category
-          </MenuItem>
           {options.map((item) => {
             return (
               <MenuItem key={item.id} value={item.id}>
