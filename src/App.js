@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import AddNewRecipe from "./Components/AddNewRecipe";
 import { useState } from "react";
 import ViewRecipes from "./Components/ViewRecipes";

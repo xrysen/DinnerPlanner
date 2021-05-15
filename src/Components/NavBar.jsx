@@ -1,4 +1,4 @@
-import "./NavBar.css";
+import "./NavBar.scss";
 import Button from "@material-ui/core/Button";
 
 const NavBar = (props) => {

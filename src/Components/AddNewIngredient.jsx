@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Paper from "@material-ui/core/Paper";
-import "./AddNewIngredient.css";
+import "./AddNewIngredient.scss";
 import TextField from "@material-ui/core/TextField";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";

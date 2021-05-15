@@ -1,6 +1,6 @@
 import TextField from "@material-ui/core/TextField";
 import Icon from "@material-ui/core/Icon";
-import "./AddNewRecipe.css";
+import "./AddNewRecipe.scss";
 import { useState, useEffect } from "react";
 import AutoComplete from "@material-ui/lab/Autocomplete";
 import Button from "@material-ui/core/Button";

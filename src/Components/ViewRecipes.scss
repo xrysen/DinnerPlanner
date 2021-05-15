@@ -1,8 +1,10 @@
+@import "../globals/variables.scss";
+
 .landing-container {
   margin-top: 75px;
   width: 90vw;
-  background-color: #C7F9CC;
-  border: 10px solid #22577A;
+  background-color: $base-light;
+  border: 10px solid $base-dark;
   border-radius: 10px;
   
 }

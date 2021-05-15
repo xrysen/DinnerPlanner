@@ -1,4 +1,4 @@
-import "./ViewRecipe.css";
+import "./ViewRecipe.scss";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useEffect, useState } from "react";
 
