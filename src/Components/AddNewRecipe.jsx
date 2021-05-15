@@ -60,7 +60,7 @@ const AddNewRecipe = (props) => {
   for (let i = 0; i <= numDirections; i++) {
     directionText.push(
       <TextField
-        style={{ marginTop: "20px" }}
+        style={{ marginTop: "20px", backgroundColor: "white" }}
         id="standard-basic"
         label="Direction"
         variant="outlined"
@@ -81,7 +81,7 @@ const AddNewRecipe = (props) => {
           getOptionLabel={(option) => option.name}
           getOptionSelected={(option, value) => option.name === value.name}
           renderInput={(params) => (
-            <TextField {...params} label="Ingredient" variant="outlined" />
+            <TextField {...params} label="Ingredient" variant="outlined" style={{backgroundColor: "white"}} />
           )}
           onChange={(event, value) => handleIngredient(i, event, value)}
           noOptionsText={
@@ -95,7 +95,7 @@ const AddNewRecipe = (props) => {
           }
         />
         <TextField
-          style={{ width: "100px", marginTop: "10px" }}
+          style={{ width: "100px", marginTop: "10px", backgroundColor: "white" }}
           placeholder="1 tsp"
           variant="outlined"
           onChange={(event) => handleMeasurement(i, event)}
@@ -171,7 +171,7 @@ const AddNewRecipe = (props) => {
           onChange={handleRecipeName}
           variant="outlined"
           required
-          style={{ marginTop: "20px" }}
+          style={{ marginTop: "20px", backgroundColor: "white" }}
         />
         <div className="ingredient-list">{items}</div>
         <div className="icons">
