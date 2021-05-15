@@ -79,8 +79,7 @@ const AddNewIngredient = (props) => {
         </Select>
         <br />
         <input type="submit" />
-        <br />
-        <button onClick={props.close}>Close</button>
+        <button className = "pink-button" onClick={props.close}>Close</button>
       </form>
     </Paper>
   );
