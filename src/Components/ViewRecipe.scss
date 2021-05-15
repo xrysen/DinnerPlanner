@@ -2,6 +2,7 @@
 
 body {
   background-color: $base-colour;
+  font-family: $main-font;
 }
 
 .recipe-container {
@@ -26,7 +27,7 @@ h1 {
 
 .directions {
   margin-top: -60px;
-  
+  font-family: $main-font;
 }
 
 table {
