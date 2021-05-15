@@ -1,5 +1,7 @@
+@import "../globals/variables.scss";
+
 body {
-  background-color: #38A3A5;
+  background-color: $base-colour;
 }
 
 .recipe-container {
