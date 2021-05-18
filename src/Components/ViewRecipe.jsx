@@ -15,14 +15,17 @@ const ViewRecipe = (props) => {
         setRecipeLoaded(true);
       })
     );
-    fetch(`http://localhost:8080/directions/${props.id}`).then((res) => {
-      res.json().then((result) => {
-        setDirections(result);
-        setTimeout(() => {
-          setIsLoaded(true);
-        }, 500);
+    if (props.id) {
+
+      fetch(`http://localhost:8080/directions/${props.id}`).then((res) => {
+        res.json().then((result) => {
+          setDirections(result);
+          setTimeout(() => {
+            setIsLoaded(true);
+          }, 500);
+        });
       });
-    });
+    }
   }, [props.id, data]);
 
   if (isLoaded && recipeLoaded && data.length > 0) {
