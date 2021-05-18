@@ -56,7 +56,7 @@ app.get("/categories/:id", (req, res) => {
 })
 
 app.post("/recipes", (req, res) => {
-  db.addNewRecipe(req.body.name, req.body.directions);
+  db.addNewRecipe(req.body.name, req.body.leftovers);
   db.getLastRecipeId().then((res) => {
     if (res.rows[0].id) {
       for (const item of req.body.ingredients) {

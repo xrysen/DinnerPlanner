@@ -6,9 +6,11 @@ import AutoComplete from "@material-ui/lab/Autocomplete";
 import Button from "@material-ui/core/Button";
 import AddNewIngredient from "./AddNewIngredient";
 import Modal from "@material-ui/core/Modal";
+import Switch from "@material-ui/core/Switch";
 
 const AddNewRecipe = (props) => {
   const [open, setOpen] = useState(false);
+  const [checked, setChecked] = useState(false);
   const [recipeName, setRecipeName] = useState("");
   const [directions, setDirections] = useState([]);
   const [existingIng, setExistingIng] = useState([]);
@@ -36,6 +38,10 @@ const AddNewRecipe = (props) => {
       setIngredients(arr);
     }
   };
+
+  const handleCheck = (e) => {
+    setChecked(e.target.checked);
+  }
 
   const handleModal = () => {
     open ? setOpen(false) : setOpen(true);
@@ -142,6 +148,7 @@ const AddNewRecipe = (props) => {
       name: recipeName,
       directions: directions,
       ingredients: ingredients,
+      leftovers: checked
     };
     event.preventDefault();
     fetch(`http://localhost:8080/recipes`, {
@@ -191,6 +198,7 @@ const AddNewRecipe = (props) => {
             remove
           </Icon>
         </div>
+        Has Leftovers? <Switch checked = {checked} onChange={handleCheck} />
         <input style={{ marginTop: "20px" }} type="submit" value="Submit" />
       </form>
       <Modal open={open} className="modal">

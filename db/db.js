@@ -56,11 +56,11 @@ const addNewIngredient = (name, type, res) => {
   res.send("Success!");
 };
 
-const addNewRecipe = (name) => {
+const addNewRecipe = (name, leftovers) => {
   pool.query(
-    `INSERT INTO recipe (name)
-    VALUES ($1)`,
-    [name]
+    `INSERT INTO recipe (name, has_leftovers)
+    VALUES ($1, $2)`,
+    [name, leftovers]
   );
   console.log(`Successfully added ${name} to the database`);
 };

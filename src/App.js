@@ -5,6 +5,7 @@ import ViewRecipes from "./Components/ViewRecipes";
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 import NavBar from "./Components/NavBar";
+import Calendar from "./Components/Calendar";
 
 function App() {
   const [view, setView] = useState("View Recipes");
@@ -22,10 +23,11 @@ function App() {
           <Paper>
             <h1 style={{ padding: "30px" }}>Dinner Planner</h1>
           </Paper>
-          <NavBar addRecipe = {()=> changeView("Add Recipe")} viewRecipes = {()=> changeView("View Recipes")} />
+          <NavBar addRecipe = {()=> changeView("Add Recipe")} viewRecipes = {()=> changeView("View Recipes")} calendar = {()=> changeView("Calendar")} />
         </Box>
-        {view === "View Recipes" && (<ViewRecipes addNew = {()=> changeView("Add Recipe")}  />)}
+        {view === "View Recipes" && (<ViewRecipes addNew = {()=> changeView("Add Recipe")}   />)}
         {view === "Add Recipe" && (<AddNewRecipe />)}
+        {view === "Calendar" && (<Calendar />)}
       </div>
     </div>
   );
