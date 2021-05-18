@@ -17,7 +17,7 @@ const ViewRecipe = (props) => {
     );
     if (props.id) {
 
-      fetch(`http://localhost:8080/directions/`, {method: "GET"}).then((res) => {
+      fetch(`http://localhost:8080/directions/${props.id}`, {method: "GET"}).then((res) => {
         res.json().then((result) => {
           setDirections(result);
           setTimeout(() => {
@@ -47,8 +47,8 @@ const ViewRecipe = (props) => {
             <h3>Directions:</h3>
             <ol>
               {directions.map((item) => {
-                return (item.recipe_id === props.id ? <li key={item.directions}>{item.directions}</li> : ""
-              )})}
+                return <li key={item.directions}>{item.directions}</li> 
+              })}
             </ol>
           </div>
         </div>

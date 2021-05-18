@@ -152,23 +152,25 @@ const AddNewRecipe = (props) => {
       leftovers: checked,
     };
     event.preventDefault();
+    if(!submitted) {
 
-    fetch(`http://localhost:8080/recipes`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(obj),
-      mode: "cors",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Success", data);
-        setDirections([]);
-        props.back();
+      fetch(`http://localhost:8080/recipes`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(obj),
+        mode: "cors",
       })
-      .catch((error) => console.log(error));
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Success", data);
+          setDirections([]);
+          setSubmitted(false);
+        })
+        .catch((error) => console.log(error));
+    }
   };
 
   return (
