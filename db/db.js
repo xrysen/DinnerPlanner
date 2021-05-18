@@ -38,6 +38,10 @@ const getRecipeDirectionsById = (id) => {
   return pool.query(`SELECT directions FROM direction WHERE recipe_id = ${id}`);
 };
 
+const getAllDirections = () => {
+  return pool.query("SELECT * FROM direction;");
+}
+
 const getAllRecipes = () => {
   return pool.query(`SELECT * FROM recipe;`);
 }
@@ -57,12 +61,11 @@ const addNewIngredient = (name, type, res) => {
 };
 
 const addNewRecipe = (name, leftovers) => {
-  pool.query(
+ return pool.query(
     `INSERT INTO recipe (name, has_leftovers)
     VALUES ($1, $2)`,
     [name, leftovers]
   );
-  console.log(`Successfully added ${name} to the database`);
 };
 
 const updateIngredientList = (recipeID, ingredientID, measurement) => {
@@ -158,5 +161,6 @@ module.exports = {
   getCategories,
   getRecipesByCat,
   getFoodTypes,
-  getIngredientsByType
+  getIngredientsByType,
+  getAllDirections
 };

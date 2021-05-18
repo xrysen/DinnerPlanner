@@ -42,7 +42,7 @@ const AddNewRecipe = (props) => {
 
   const handleCheck = (e) => {
     setChecked(e.target.checked);
-  }
+  };
 
   const handleModal = () => {
     open ? setOpen(false) : setOpen(true);
@@ -149,31 +149,30 @@ const AddNewRecipe = (props) => {
       name: recipeName,
       directions: directions,
       ingredients: ingredients,
-      leftovers: checked
+      leftovers: checked,
     };
     event.preventDefault();
-    if (!submitted) {
-      fetch(`http://localhost:8080/recipes`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(obj),
-        mode: "cors",
+
+    fetch(`http://localhost:8080/recipes`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(obj),
+      mode: "cors",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success", data);
+        setDirections([]);
+        props.back();
       })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("Success", data);
-          setSubmitted(true);
-        })
-        .catch((error) => console.log(error));
-      console.log(obj);
-    }
+      .catch((error) => console.log(error));
   };
 
   return (
-    <div className = "new-recipe.container">
+    <div className="new-recipe.container">
       <h1>Add New Recipe</h1>
       <form className="form-container" onSubmit={handleSubmit}>
         <TextField
@@ -182,7 +181,7 @@ const AddNewRecipe = (props) => {
           onChange={handleRecipeName}
           variant="outlined"
           required
-          style={{ marginTop: "20px"}}
+          style={{ marginTop: "20px" }}
         />
         <div className="ingredient-list">{items}</div>
         <div className="icons">
@@ -202,7 +201,7 @@ const AddNewRecipe = (props) => {
             remove
           </Icon>
         </div>
-        Has Leftovers? <Switch checked = {checked} onChange={handleCheck} />
+        Has Leftovers? <Switch checked={checked} onChange={handleCheck} />
         <input style={{ marginTop: "20px" }} type="submit" value="Submit" />
       </form>
       <Modal open={open} className="modal">

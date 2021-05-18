@@ -8,10 +8,10 @@ import ViewRecipe from "./ViewRecipe";
 
 const ViewRecipes = (props) => {
   const [recipes, setRecipes] = useState([]);
-  const [currRec, setCurrRec] = useState("");
+  const [currRec, setCurrRec] = useState(0);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/recipes`)
+    fetch(`http://localhost:8080/recipes`, { method: "GET" })
       .then((res) => res.json())
       .then((res) => {
         setRecipes(res);
