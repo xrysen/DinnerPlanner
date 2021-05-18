@@ -10,6 +10,7 @@ import Switch from "@material-ui/core/Switch";
 
 const AddNewRecipe = (props) => {
   const [open, setOpen] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [checked, setChecked] = useState(false);
   const [recipeName, setRecipeName] = useState("");
   const [directions, setDirections] = useState([]);
@@ -66,7 +67,7 @@ const AddNewRecipe = (props) => {
   for (let i = 0; i <= numDirections; i++) {
     directionText.push(
       <TextField
-        style={{ marginTop: "20px", backgroundColor: "white" }}
+        style={{ marginTop: "20px" }}
         id="standard-basic"
         label="Direction"
         variant="outlined"
@@ -87,7 +88,7 @@ const AddNewRecipe = (props) => {
           getOptionLabel={(option) => option.name}
           getOptionSelected={(option, value) => option.name === value.name}
           renderInput={(params) => (
-            <TextField {...params} label="Ingredient" variant="outlined" style={{backgroundColor: "white"}} />
+            <TextField {...params} label="Ingredient" variant="outlined" />
           )}
           onChange={(event, value) => handleIngredient(i, event, value)}
           noOptionsText={
@@ -101,7 +102,7 @@ const AddNewRecipe = (props) => {
           }
         />
         <TextField
-          style={{ width: "100px", marginTop: "10px", backgroundColor: "white" }}
+          style={{ width: "100px", marginTop: "10px" }}
           placeholder="1 tsp"
           variant="outlined"
           onChange={(event) => handleMeasurement(i, event)}
@@ -151,21 +152,24 @@ const AddNewRecipe = (props) => {
       leftovers: checked
     };
     event.preventDefault();
-    fetch(`http://localhost:8080/recipes`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(obj),
-      mode: "cors",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Success", data);
+    if (!submitted) {
+      fetch(`http://localhost:8080/recipes`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(obj),
+        mode: "cors",
       })
-      .catch((error) => console.log(error));
-    console.log(obj);
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Success", data);
+          setSubmitted(true);
+        })
+        .catch((error) => console.log(error));
+      console.log(obj);
+    }
   };
 
   return (
@@ -178,7 +182,7 @@ const AddNewRecipe = (props) => {
           onChange={handleRecipeName}
           variant="outlined"
           required
-          style={{ marginTop: "20px", backgroundColor: "white" }}
+          style={{ marginTop: "20px"}}
         />
         <div className="ingredient-list">{items}</div>
         <div className="icons">
