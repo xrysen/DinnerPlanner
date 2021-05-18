@@ -5,13 +5,16 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import Switch from "@material-ui/core/Switch";
 import "./Calendar.scss";
 import { useState, useEffect } from "react";
+import e from "cors";
 
 const Calendar = () => {
   const [dinners, setDinners] = useState([]);
   const [recipes, setRecipes] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  const [checked, setChecked] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:8080/recipes")
@@ -22,15 +25,20 @@ const Calendar = () => {
     });
   }, []);
 
+  const handleCheck = (e) => {
+    setChecked(e.target.checked)
+  }
+
   const generateRecipes = () => {
     setDinners([]);
     let arr = [];
     let recipeToUse = 0;
-    for (let i = 0; i < recipes.length; i++) {
+    for (let i = 0; i < 7; i++) {
       recipeToUse = Math.floor(Math.random() * recipes.length) + 1;
       arr.push(recipeToUse);
-      if (recipes[recipeToUse - 1].has_leftovers) {
+      if (recipes[recipeToUse - 1].has_leftovers && checked && i !== 6) {
         arr.push(recipeToUse);
+        i++;
       }
     }
     console.log(recipes);
@@ -69,7 +77,8 @@ const Calendar = () => {
         </TableRow>
       </TableBody>
     </TableContainer>
-
+    Use Leftovers? <Switch checked = {checked} onChange={handleCheck} />
+    <br />
     <button className = "pink-button" onClick = {()=> generateRecipes()}>Generate</button>
     </div>
   )
