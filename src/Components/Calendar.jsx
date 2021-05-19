@@ -15,6 +15,7 @@ const Calendar = () => {
   const [recipes, setRecipes] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const [checked, setChecked] = useState(false);
+  const [used, setUsed] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:8080/recipes")
@@ -33,12 +34,13 @@ const Calendar = () => {
     setDinners([]);
     let arr = [];
     let recipeToUse = 0;
-    for (let i = 0; i < 7; i++) {
+    while (arr.length < 7) {
       recipeToUse = Math.floor(Math.random() * recipes.length) + 1;
-      arr.push(recipeToUse);
-      if (recipes[recipeToUse - 1].has_leftovers && checked && i !== 6) {
+      if (arr.indexOf(recipeToUse) === -1) {
         arr.push(recipeToUse);
-        i++;
+        if (recipes[recipeToUse - 1].has_leftovers && checked && arr.length !== 6) {
+          arr.push(recipeToUse);
+        }
       }
     }
     console.log(recipes);

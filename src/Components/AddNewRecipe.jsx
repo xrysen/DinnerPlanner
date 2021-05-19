@@ -168,6 +168,7 @@ const AddNewRecipe = (props) => {
           console.log("Success", data);
           setDirections([]);
           setSubmitted(false);
+          props.back();
         })
         .catch((error) => console.log(error));
     }

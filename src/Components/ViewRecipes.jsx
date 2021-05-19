@@ -32,7 +32,7 @@ const ViewRecipes = (props) => {
               {recipes
                 ? recipes.map((item) => {
                     return (
-                      <div>
+                      <div key = {item.id}>
                         <Button onClick={() => handleClick(item.id)}>
                           {item.name}
                         </Button>
