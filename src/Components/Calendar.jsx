@@ -38,7 +38,7 @@ const Calendar = () => {
       recipeToUse = Math.floor(Math.random() * recipes.length) + 1;
       if (arr.indexOf(recipeToUse) === -1) {
         arr.push(recipeToUse);
-        if (recipes[recipeToUse - 1].has_leftovers && checked && arr.length !== 6) {
+        if (recipes[recipeToUse - 1].has_leftovers && checked && arr.length < 5) {
           arr.push(recipeToUse);
         }
       }
