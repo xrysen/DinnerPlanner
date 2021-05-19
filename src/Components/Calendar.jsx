@@ -81,8 +81,7 @@ const Calendar = () => {
           </TableRow>
         </TableBody>
       </TableContainer>
-      Use Leftovers? <Switch checked={checked} onChange={handleCheck} />
-      <br />
+      <div style={{ marginTop: "20px"}}>Use Leftovers? <Switch checked={checked} onChange={handleCheck} /></div>
       <button className="pink-button" onClick={() => generateRecipes()}>
         Generate
       </button>
