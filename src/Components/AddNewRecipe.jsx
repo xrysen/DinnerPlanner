@@ -21,6 +21,7 @@ const AddNewRecipe = (props) => {
       measurement: "",
     },
   ]);
+  const [fullRecipe, setFullRecipe] = useState(true);
   const [numIngredients, setNumIngredients] = useState(0);
   const [numDirections, setNumDirections] = useState(0);
   const items = [];
@@ -174,9 +175,13 @@ const AddNewRecipe = (props) => {
     }
   };
 
+  const handleFullRecipe = (event) => {
+    setFullRecipe(event.target.checked);
+  }
+
   return (
     <div className="new-recipe.container">
-      <h1>Add New Recipe</h1>
+      <h1>Add New Recipe or Meal</h1>
       <form className="form-container" onSubmit={handleSubmit}>
         <TextField
           id="standard-basic"
@@ -186,8 +191,11 @@ const AddNewRecipe = (props) => {
           required
           style={{ marginTop: "20px" }}
         />
-        <div className="ingredient-list">{items}</div>
-        <div className="icons">
+        Add whole recipe? <Switch checked = {fullRecipe} onChange={handleFullRecipe} />
+        {fullRecipe && (
+          <>
+          <div className="ingredient-list">{items}</div>
+          <div className="icons">
           <Icon className="icon" onClick={() => increaseIngredientCount()}>
             add_circle
           </Icon>
@@ -206,12 +214,14 @@ const AddNewRecipe = (props) => {
         </div>
         Has Leftovers? <Switch checked={checked} onChange={handleCheck} />
         <input style={{ marginTop: "20px" }} type="submit" value="Submit" />
-      </form>
-      <Modal open={open} className="modal">
+        </>
+        )}
+        </form>
+        <Modal open={open} className="modal">
         <AddNewIngredient close={handleModal} />
       </Modal>
     </div>
-  );
+    );
 };
 
 export default AddNewRecipe;
