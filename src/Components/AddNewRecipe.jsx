@@ -213,9 +213,9 @@ const AddNewRecipe = (props) => {
           </Icon>
         </div>
         Has Leftovers? <Switch checked={checked} onChange={handleCheck} />
-        <input style={{ marginTop: "20px" }} type="submit" value="Submit" />
         </>
         )}
+        <input style={{ marginTop: "20px" }} type="submit" value="Submit" />
         </form>
         <Modal open={open} className="modal">
         <AddNewIngredient close={handleModal} />
