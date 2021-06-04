@@ -64,14 +64,18 @@ app.get("/users/", (req, res) => {
     if(result.rows.length) {
       res.status(200).send(result.rows);
     } else {
-      db.addNewUser(req.query.email, req.query.name);
-      res.status(200).send("Succesfully added new user");
+      res.status(400).send("Adding user to database");
     }
   }).catch(err => console.log(err));
 })
 
+app.post("/users/", (req, res) => {
+  db.addNewUser(req.body.email, req.body.name);
+  res.status(200).send("Succesfully Added new user");
+})
+
 app.post("/recipes", (req, res) => {
-  db.addNewRecipe(req.body.name, req.body.leftovers).then((res) => {
+  db.addNewRecipe(req.body.name, req.body.leftovers, req.body.userId).then((res) => {
     db.getLastRecipeId().then((res) => {
       if (res.rows[0].id) {
         for (const item of req.body.ingredients) {

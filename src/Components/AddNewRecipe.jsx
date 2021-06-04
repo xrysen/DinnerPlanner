@@ -7,9 +7,12 @@ import Button from "@material-ui/core/Button";
 import AddNewIngredient from "./AddNewIngredient";
 import Modal from "@material-ui/core/Modal";
 import Switch from "@material-ui/core/Switch";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const AddNewRecipe = (props) => {
+  const { user } = useAuth0();
   const [open, setOpen] = useState(false);
+  const [userId, setUserId] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [checked, setChecked] = useState(false);
   const [recipeName, setRecipeName] = useState("");
@@ -27,11 +30,42 @@ const AddNewRecipe = (props) => {
   const items = [];
   const directionText = [];
 
+  const getUserId = () => {
+    fetch(`http://localhost:8080/users?email=${user.email}&name=${user.name}`)
+    .then((res) => res.json())
+    .then((res) => {
+      if (res[0].id) {
+        setUserId(res[0].id);
+      } else {
+        return false;
+      }
+    })
+  }
+
   useEffect(() => {
     fetch("http://localhost:8080/ingredients")
       .then((res) => res.json())
       .then((res) => setExistingIng(res));
   }, [existingIng]);
+
+  useEffect(() => {
+    if (!getUserId()) {
+      let obj = {
+        email: user.email,
+        name: user.name
+      }
+      fetch(`http://localhost:8080/users`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(obj),
+        mode: "cors"
+      }).then(() => getUserId());
+      
+    }
+  }, [])
 
   const handleIngredient = (index, event, value) => {
     let arr = [...ingredients];
@@ -148,11 +182,12 @@ const AddNewRecipe = (props) => {
   const handleSubmit = (event) => {
     let obj = {
       name: recipeName,
+      userId: userId,
       directions: directions,
       ingredients: ingredients,
       leftovers: checked,
     };
-    event.preventDefault();
+    
     if(!submitted) {
 
       fetch(`http://localhost:8080/recipes`, {
@@ -168,9 +203,8 @@ const AddNewRecipe = (props) => {
         .then((data) => {
           console.log("Success", data);
           setDirections([]);
-          setSubmitted(false);
-          props.back();
         })
+        .then(() => setSubmitted(true))
         .catch((error) => console.log(error));
     }
   };
@@ -181,6 +215,10 @@ const AddNewRecipe = (props) => {
 
   return (
     <div className="new-recipe.container">
+      {submitted ? 
+        <h1>Recipe added!</h1>
+        :
+      <>
       <h1>Add New Recipe or Meal</h1>
       <form className="form-container" onSubmit={handleSubmit}>
         <TextField
@@ -190,7 +228,7 @@ const AddNewRecipe = (props) => {
           variant="outlined"
           required
           style={{ marginTop: "20px" }}
-        />
+          />
         Add whole recipe? <Switch checked = {fullRecipe} onChange={handleFullRecipe} />
         {fullRecipe && (
           <>
@@ -220,6 +258,7 @@ const AddNewRecipe = (props) => {
         <Modal open={open} className="modal">
         <AddNewIngredient close={handleModal} />
       </Modal>
+     </> }
     </div>
     );
 };

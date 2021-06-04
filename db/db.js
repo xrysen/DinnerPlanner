@@ -68,11 +68,11 @@ const addNewIngredient = (name, type, res) => {
   res.send("Success!");
 };
 
-const addNewRecipe = (name, leftovers) => {
+const addNewRecipe = (name, leftovers, userId) => {
  return pool.query(
-    `INSERT INTO recipe (name, has_leftovers)
-    VALUES ($1, $2)`,
-    [name, leftovers]
+    `INSERT INTO recipe (name, has_leftovers, user_id)
+    VALUES ($1, $2, $3)`,
+    [name, leftovers, userId]
   );
 };
 
