@@ -8,6 +8,14 @@ const pool = new Pool({
   connectionString: connectionString,
 });
 
+const getUserByEmail = (email) => {
+  return pool.query(`SELECT users.id FROM users WHERE email = '${email}'`);
+}
+
+const addNewUser = (email, name) => {
+  pool.query(`INSERT INTO users (email, first_name) VALUES ($1, $2)`, [email, name]);
+}
+
 const getAllTypes = (request, response) => {
   pool.query("SELECT * FROM food_type", (error, results) => {
     if (error) {
@@ -162,5 +170,7 @@ module.exports = {
   getRecipesByCat,
   getFoodTypes,
   getIngredientsByType,
-  getAllDirections
+  getAllDirections,
+  getUserByEmail,
+  addNewUser
 };

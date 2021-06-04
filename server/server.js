@@ -59,6 +59,17 @@ app.get("/categories/:id", (req, res) => {
   );
 });
 
+app.get("/users/", (req, res) => {
+  db.getUserByEmail(req.query.email).then((result) => {
+    if(result.rows.length) {
+      res.status(200).send(result.rows);
+    } else {
+      db.addNewUser(req.query.email, req.query.name);
+      res.status(200).send("Succesfully added new user");
+    }
+  }).catch(err => console.log(err));
+})
+
 app.post("/recipes", (req, res) => {
   db.addNewRecipe(req.body.name, req.body.leftovers).then((res) => {
     db.getLastRecipeId().then((res) => {
