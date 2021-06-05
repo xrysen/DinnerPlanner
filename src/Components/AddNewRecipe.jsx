@@ -10,7 +10,7 @@ import Switch from "@material-ui/core/Switch";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const AddNewRecipe = (props) => {
-  const { user } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
   const [open, setOpen] = useState(false);
   const [userId, setUserId] = useState(0);
   const [submitted, setSubmitted] = useState(false);
@@ -35,6 +35,14 @@ const AddNewRecipe = (props) => {
       .then((res) => res.json())
       .then((res) => setExistingIng(res));
   }, [existingIng]);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetch(`http://localhost:8080/users?email=${user.email}`)
+      .then((res) => res.json())
+      .then((res) => setUserId(Number(res[0].id)))
+    }
+  })
 
   const handleIngredient = (index, event, value) => {
     let arr = [...ingredients];

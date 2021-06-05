@@ -24,32 +24,6 @@ const ViewRecipes = (props) => {
     }
   }, [isAuthenticated, userId]);
 
-  // const getUserId = () => {
-  //   fetch(`http://localhost:8080/users?email=${user.email}&name=${user.name}`)
-  //     .then((res) => res.json())
-  //     .then((res) => {
-  //       if (res[0].id) {
-  //         console.log(res);
-  //         setUserId(res[0].id);
-  //       } else {
-  //         let obj = {
-  //           email: user.email,
-  //           name: user.name
-  //         };
-
-  //         fetch(`http://localhost:8080/users`, {
-  //           method: "POST",
-  //           headers: {
-  //             "Content-type": "application/json",
-  //             Accept: "application/json",
-  //           }, 
-  //           body: JSON.stringify(obj),
-  //           mode: "cors"
-  //         })
-  //       }
-  //     });
-  // };
-
   useEffect(() => {
     if(isAuthenticated) {
       fetch(`http://localhost:8080/users?email=${user.email}&name=${user.name}`)
@@ -75,30 +49,6 @@ const ViewRecipes = (props) => {
       })
     }
   }, [isAuthenticated]);
-
-
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     if (!getUserId()) {
-  //       let obj = {
-  //         email: user.email,
-  //         name: user.name,
-  //       };
-
-  //       fetch(`http://localhost:8080/users`, {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-type": "application/json",
-  //           Accept: "application/json",
-  //         },
-  //         body: JSON.stringify(obj),
-  //         mode: "cors",
-  //       }).then(() => getUserId());
-  //     }
-  //   }
-
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [isAuthenticated]);
 
   const handleClick = (index) => {
     setCurrRec(index);
