@@ -63,9 +63,7 @@ app.get("/users/", (req, res) => {
   db.getUserByEmail(req.query.email).then((result) => {
     if(result.rows.length) {
       res.status(200).send(result.rows);
-    } else {
-      res.status(400).send("Adding user to database");
-    }
+    } 
   }).catch(err => console.log(err));
 })
 

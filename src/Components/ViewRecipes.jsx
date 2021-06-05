@@ -11,6 +11,7 @@ import LoginButton from "./LoginButton";
 const ViewRecipes = (props) => {
   const [recipes, setRecipes] = useState([]);
   const [currRec, setCurrRec] = useState(0);
+  const [userId, setUserId] = useState(0);
   const { user, isAuthenticated } = useAuth0();
 
   useEffect(() => {
@@ -19,6 +20,41 @@ const ViewRecipes = (props) => {
       .then((res) => {
         setRecipes(res);
       });
+  }, []);
+
+  const getUserId = () => {
+    fetch(`http://localhost:8080/users?email=${user.email}&name=${user.name}`)
+      .then((res) => res.json())
+      .then((res) => {
+        if (res[0].length) {
+          setUserId(res[0].id);
+        } else {
+          return false;
+        }
+      });
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      if (!getUserId()) {
+        let obj = {
+          email: user.email,
+          name: user.name,
+        };
+
+        fetch(`http://localhost:8080/users`, {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(obj),
+          mode: "cors",
+        }).then(() => getUserId());
+      }
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleClick = (index) => {
