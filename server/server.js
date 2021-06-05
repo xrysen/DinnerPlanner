@@ -49,6 +49,10 @@ app.get("/recipes", (req, res) => {
   db.getAllRecipes().then((result) => res.send(result.rows));
 });
 
+app.get("/recipes/users/:userId", (req, res) => {
+  db.getRecipesByUserId(req.params.userId).then((result) => res.send(result.rows));
+})
+
 app.get("/categories", (req, res) => {
   db.getCategories().then((result) => res.status(200).send(result.rows));
 });
@@ -63,7 +67,9 @@ app.get("/users/", (req, res) => {
   db.getUserByEmail(req.query.email).then((result) => {
     if(result.rows.length) {
       res.status(200).send(result.rows);
-    } 
+    } else {
+      res.json([{error: "User doesn't exist"}]);
+    }
   }).catch(err => console.log(err));
 })
 

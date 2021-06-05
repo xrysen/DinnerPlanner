@@ -58,6 +58,10 @@ const getRecipesByCat = (catId) => {
   return pool.query(`SELECT * FROM recipe WHERE category_id = $1`, [catId]);
 }
 
+const getRecipesByUserId = (userId) => {
+  return pool.query(`SELECT * FROM recipe WHERE user_id = ${userId}`);
+}
+
 const addNewIngredient = (name, type, res) => {
   pool.query(
     `INSERT INTO ingredient (name, type_id) 
@@ -172,5 +176,6 @@ module.exports = {
   getIngredientsByType,
   getAllDirections,
   getUserByEmail,
-  addNewUser
+  addNewUser,
+  getRecipesByUserId
 };
