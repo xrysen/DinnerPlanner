@@ -30,42 +30,11 @@ const AddNewRecipe = (props) => {
   const items = [];
   const directionText = [];
 
-  const getUserId = () => {
-    fetch(`http://localhost:8080/users?email=${user.email}&name=${user.name}`)
-    .then((res) => res.json())
-    .then((res) => {
-      if (res[0].id) {
-        setUserId(res[0].id);
-      } else {
-        return false;
-      }
-    })
-  }
-
   useEffect(() => {
     fetch("http://localhost:8080/ingredients")
       .then((res) => res.json())
       .then((res) => setExistingIng(res));
   }, [existingIng]);
-
-  useEffect(() => {
-    if (!getUserId()) {
-      let obj = {
-        email: user.email,
-        name: user.name
-      }
-      fetch(`http://localhost:8080/users`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(obj),
-        mode: "cors"
-      }).then(() => getUserId());
-      
-    }
-  }, [])
 
   const handleIngredient = (index, event, value) => {
     let arr = [...ingredients];
