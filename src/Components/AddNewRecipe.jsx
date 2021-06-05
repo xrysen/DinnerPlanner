@@ -192,8 +192,8 @@ const AddNewRecipe = (props) => {
 
   return (
     <div className="new-recipe.container">
-      {submitted ? 
-        <h1>Recipe added!</h1>
+      {!isAuthenticated ? 
+        <h1>You must be logged in to view this page</h1>
         :
       <>
       <h1>Add New Recipe or Meal</h1>
