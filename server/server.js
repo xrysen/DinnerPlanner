@@ -97,6 +97,11 @@ app.post("/recipes", (req, res) => {
   });
 });
 
+app.delete("/recipes/:id", (req, res) => {
+  db.deleteRecipe(req.params.id);
+  res.status(200).send("Successfully deleted recipe");
+})
+
 app.get("/food_types", (req, res) => {
   db.getFoodTypes().then((result) => res.status(200).send(result.rows));
 });

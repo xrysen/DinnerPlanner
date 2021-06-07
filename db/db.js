@@ -152,6 +152,12 @@ const resetIngredientList = () => {
   );
 };
 
+const deleteRecipe = (recipeId) => {
+  pool.query(
+    `DELETE FROM recipe WHERE id = $1`, [recipeId]
+  );
+}
+
 const resetDB = () => {
   resetRecipes();
   resetDirections();
@@ -177,5 +183,6 @@ module.exports = {
   getAllDirections,
   getUserByEmail,
   addNewUser,
-  getRecipesByUserId
+  getRecipesByUserId,
+  deleteRecipe
 };
