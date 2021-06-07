@@ -7,6 +7,8 @@ import Button from "@material-ui/core/Button";
 import ViewRecipe from "./ViewRecipe";
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "./LoginButton";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import EditIcon from '@material-ui/icons/Edit';
 
 const ViewRecipes = (props) => {
   const [recipes, setRecipes] = useState([]);
@@ -15,38 +17,38 @@ const ViewRecipes = (props) => {
   const { user, isAuthenticated } = useAuth0();
 
   useEffect(() => {
-    if(isAuthenticated) {
+    if (isAuthenticated) {
       fetch(`http://localhost:8080/recipes/users/${userId}`)
-      .then((res) => res.json())
-      .then((res) => {
-        setRecipes(res);
-      })
+        .then((res) => res.json())
+        .then((res) => {
+          setRecipes(res);
+        });
     }
   }, [isAuthenticated, userId]);
 
   useEffect(() => {
-    if(isAuthenticated) {
+    if (isAuthenticated) {
       fetch(`http://localhost:8080/users?email=${user.email}&name=${user.name}`)
-      .then((res) => res.json())
-      .then((res) => {
-        if (res[0].id) {
-          setUserId(res[0].id);
-        } else {
-          let obj = {
-            email: user.email,
-            name: user.name
+        .then((res) => res.json())
+        .then((res) => {
+          if (res[0].id) {
+            setUserId(res[0].id);
+          } else {
+            let obj = {
+              email: user.email,
+              name: user.name,
+            };
+            fetch(`http://localhost:8080/users`, {
+              method: "POST",
+              headers: {
+                "Content-type": "application/json",
+                Accept: "application/json",
+              },
+              body: JSON.stringify(obj),
+              mode: "cors",
+            });
           }
-          fetch(`http://localhost:8080/users`, {
-            method: "POST",
-            headers: {
-              "Content-type": "application/json",
-              Accept: "application/json",
-            },
-            body: JSON.stringify(obj),
-            mode: "cors"
-          })
-        }
-      })
+        });
     }
   }, [isAuthenticated]);
 
@@ -66,6 +68,8 @@ const ViewRecipes = (props) => {
                   ? recipes.map((item) => {
                       return (
                         <div key={item.id}>
+                          <EditIcon className = "icon-edit" />
+                          <DeleteForeverIcon className = "icon-delete" />
                           <Button onClick={() => handleClick(item.id)}>
                             {item.name}
                           </Button>
