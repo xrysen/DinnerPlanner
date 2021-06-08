@@ -9,6 +9,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "./LoginButton";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from '@material-ui/icons/Edit';
+import AddIcon from '@material-ui/icons/Add';
 
 const ViewRecipes = (props) => {
   const [recipes, setRecipes] = useState([]);
@@ -68,7 +69,7 @@ const ViewRecipes = (props) => {
                   ? recipes.map((item) => {
                       return (
                         <div key={item.id}>
-                          <EditIcon className = "icon-edit" />
+                          {/* <EditIcon className = "icon-edit" /> */}
                           <DeleteForeverIcon className = "icon-delete" />
                           <Button onClick={() => handleClick(item.id)}>
                             {item.name}
@@ -77,6 +78,7 @@ const ViewRecipes = (props) => {
                       );
                     })
                   : ""}
+                <AddIcon className = "icon-add" />
                 <Button onClick={props.addNew}>Add New Recipe</Button>
               </Grid>
               <Grid item md={6}>
