@@ -10,11 +10,15 @@ import LoginButton from "./LoginButton";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
+import Modal from "@material-ui/core/Modal";
+import DeleteRecipePrompt from "./DeleteRecipePrompt";
 
 const ViewRecipes = (props) => {
   const [recipes, setRecipes] = useState([]);
   const [currRec, setCurrRec] = useState(0);
   const [userId, setUserId] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedRecipe, setSelectedRecipe] = useState({});
   const { user, isAuthenticated } = useAuth0();
 
   useEffect(() => {
@@ -57,9 +61,18 @@ const ViewRecipes = (props) => {
     setCurrRec(index);
   };
 
+  const handleDeletePrompt = (id, name) => {
+    setSelectedRecipe(name);
+    setModalOpen(true);
+  }
+
   return (
     <div>
       <Box>
+      <Modal open={modalOpen} className="modal">
+        
+        <DeleteRecipePrompt close = {()=> setModalOpen(false)} recipeName = {selectedRecipe}  />
+      </Modal>
         {isAuthenticated ? (
           <Container>
             <Grid container spacing={2}>
@@ -70,7 +83,7 @@ const ViewRecipes = (props) => {
                       return (
                         <div key={item.id}>
                           {/* <EditIcon className = "icon-edit" /> */}
-                          <DeleteForeverIcon className = "icon-delete" />
+                          <DeleteForeverIcon className = "icon-delete" onClick={()=> handleDeletePrompt(item.id, item.name)} />
                           <Button onClick={() => handleClick(item.id)}>
                             {item.name}
                           </Button>
@@ -95,6 +108,7 @@ const ViewRecipes = (props) => {
           </Container>
         )}
       </Box>
+      
     </div>
   );
 };
