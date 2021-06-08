@@ -29,7 +29,7 @@ const ViewRecipes = (props) => {
           setRecipes(res);
         });
     }
-  }, [isAuthenticated, userId]);
+  }, [isAuthenticated, userId, recipes]);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -62,7 +62,11 @@ const ViewRecipes = (props) => {
   };
 
   const handleDeletePrompt = (id, name) => {
-    setSelectedRecipe(name);
+    const recipe = {
+      id: id,
+      name: name
+    }
+    setSelectedRecipe(recipe);
     setModalOpen(true);
   }
 
@@ -71,7 +75,7 @@ const ViewRecipes = (props) => {
       <Box>
       <Modal open={modalOpen} className="modal">
         
-        <DeleteRecipePrompt close = {()=> setModalOpen(false)} recipeName = {selectedRecipe}  />
+        <DeleteRecipePrompt close = {()=> setModalOpen(false)} recipe = {selectedRecipe}  />
       </Modal>
         {isAuthenticated ? (
           <Container>
