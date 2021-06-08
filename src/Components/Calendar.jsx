@@ -24,23 +24,23 @@ const Calendar = () => {
   useEffect(() => {
     if (isAuthenticated) {
       fetch(`http://localhost:8080/recipes/users/${userId}`)
-      .then((res) => res.json())
-      .then((res) => {
-        setRecipes(res);
-        setLoaded(true);
-      })
+        .then((res) => res.json())
+        .then((res) => {
+          setRecipes(res);
+          setLoaded(true);
+        });
     }
-  }, [isAuthenticated, userId])
+  }, [isAuthenticated, userId]);
 
-  useEffect(()=> {
+  useEffect(() => {
     if (isAuthenticated) {
       fetch(`http://localhost:8080/users?email=${user.email}&name=${user.name}`)
-      .then((res) => res.json())
-      .then((res) => {
-        setUserId(res[0].id);
-      })
+        .then((res) => res.json())
+        .then((res) => {
+          setUserId(res[0].id);
+        });
     }
-  }, [isAuthenticated])
+  }, [isAuthenticated]);
 
   const handleCheck = (e) => {
     setChecked(e.target.checked);
@@ -52,12 +52,22 @@ const Calendar = () => {
     let recipeToUse = 0;
     while (arr.length < 7) {
       recipeToUse = Math.floor(Math.random() * recipes.length) + 1;
-      if (arr.indexOf(recipeToUse) === -1) {
+      if (recipes.length < 7) {
         arr.push(recipeToUse);
         if (
           recipes[recipeToUse - 1].has_leftovers &&
           checked &&
-          arr.length < 5
+          arr.length <= 5
+          ) {
+            arr.push(recipeToUse);
+          }
+          // If num recipes can fill a whole week, no doubles to be used
+      } else if (arr.indexOf(recipeToUse) === -1 && recipes.length >= 7) {
+        arr.push(recipeToUse);
+        if (
+          recipes[recipeToUse - 1].has_leftovers &&
+          checked &&
+          arr.length <= 5
         ) {
           arr.push(recipeToUse);
         }
@@ -96,11 +106,12 @@ const Calendar = () => {
           </TableRow>
         </TableBody>
       </TableContainer>
-      <div style={{ marginTop: "20px"}}>Use Leftovers? <Switch checked={checked} onChange={handleCheck} /></div>
+      <div style={{ marginTop: "20px" }}>
+        Use Leftovers? <Switch checked={checked} onChange={handleCheck} />
+      </div>
       <button className="pink-button" onClick={() => generateRecipes()}>
         Generate
       </button>
-
     </div>
   );
 };
