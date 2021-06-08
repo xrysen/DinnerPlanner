@@ -10,6 +10,7 @@ import "./Calendar.scss";
 import { useState, useEffect } from "react";
 import Link from "@material-ui/core/Link";
 import Modal from "@material-ui/core/Modal";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Calendar = () => {
   const [dinners, setDinners] = useState([]);
@@ -17,15 +18,29 @@ const Calendar = () => {
   const [loaded, setLoaded] = useState(false);
   const [checked, setChecked] = useState(false);
   const [open, setOpen] = useState(false);
+  const { user, isAuthenticated } = useAuth0();
+  const [userId, setUserId] = useState(0);
 
   useEffect(() => {
-    fetch("http://localhost:8080/recipes")
+    if (isAuthenticated) {
+      fetch(`http://localhost:8080/recipes/users/${userId}`)
       .then((res) => res.json())
       .then((res) => {
         setRecipes(res);
         setLoaded(true);
-      });
-  }, []);
+      })
+    }
+  }, [isAuthenticated, userId])
+
+  useEffect(()=> {
+    if (isAuthenticated) {
+      fetch(`http://localhost:8080/users?email=${user.email}&name=${user.name}`)
+      .then((res) => res.json())
+      .then((res) => {
+        setUserId(res[0].id);
+      })
+    }
+  }, [isAuthenticated])
 
   const handleCheck = (e) => {
     setChecked(e.target.checked);
