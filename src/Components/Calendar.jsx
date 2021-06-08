@@ -78,6 +78,8 @@ const Calendar = () => {
 
   return (
     <div className="calendar-container">
+      { recipes.length > 0 ?
+      <>
       <TableContainer component={Paper}>
         <TableHead>
           <TableRow>
@@ -94,15 +96,15 @@ const Calendar = () => {
           <TableRow>
             {dinners.length
               ? dinners.map((item) => {
-                  return (
-                    <TableCell>
+                return (
+                  <TableCell>
                       <Link className="recipe-link">
                         {recipes[item - 1].name}
                       </Link>
                     </TableCell>
                   );
                 })
-              : ""}
+                : ""}
           </TableRow>
         </TableBody>
       </TableContainer>
@@ -112,8 +114,10 @@ const Calendar = () => {
       <button className="pink-button" onClick={() => generateRecipes()}>
         Generate
       </button>
+      </>
+  : <h1>You must have at least one recipe associated with your account</h1>}
     </div>
-  );
-};
+    );
+  };
 
 export default Calendar;
