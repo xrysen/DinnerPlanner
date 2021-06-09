@@ -81,7 +81,7 @@ const ViewRecipes = (props) => {
           <Container>
             <Grid container spacing={2}>
               <Grid item md={6}>
-                <h3>Recipes</h3>
+                <h3>Recipes and Meals</h3>
                 {recipes
                   ? recipes.map((item) => {
                       return (
@@ -105,8 +105,8 @@ const ViewRecipes = (props) => {
           </Container>
         ) : (
           <Container style={{ textAlign: "center" }}>
-            <Grid>Please Login</Grid>
-            <Grid>
+            <Grid style = {{ paddingTop: "50px" }}>Please Login</Grid>
+            <Grid style = {{ paddingBottom: "50px"}}>
               <LoginButton />
             </Grid>
           </Container>

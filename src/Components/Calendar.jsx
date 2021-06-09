@@ -58,10 +58,10 @@ const Calendar = () => {
           recipes[recipeToUse - 1].has_leftovers &&
           checked &&
           arr.length <= 5
-          ) {
-            arr.push(recipeToUse);
-          }
-          // If num recipes can fill a whole week, no doubles to be used
+        ) {
+          arr.push(recipeToUse);
+        }
+        // If num recipes can fill a whole week, no doubles to be used
       } else if (arr.indexOf(recipeToUse) === -1 && recipes.length >= 7) {
         arr.push(recipeToUse);
         if (
@@ -78,46 +78,48 @@ const Calendar = () => {
 
   return (
     <div className="calendar-container">
-      { recipes.length > 0 ?
-      <>
-      <TableContainer component={Paper}>
-        <TableHead>
-          <TableRow>
-            <TableCell>Sunday</TableCell>
-            <TableCell>Monday</TableCell>
-            <TableCell>Tuesday</TableCell>
-            <TableCell>Wednesday</TableCell>
-            <TableCell>Thursday</TableCell>
-            <TableCell>Friday</TableCell>
-            <TableCell>Saturday</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          <TableRow>
-            {dinners.length
-              ? dinners.map((item) => {
-                return (
-                  <TableCell>
-                      <Link className="recipe-link">
-                        {recipes[item - 1].name}
-                      </Link>
-                    </TableCell>
-                  );
-                })
-                : ""}
-          </TableRow>
-        </TableBody>
-      </TableContainer>
-      <div style={{ marginTop: "20px" }}>
-        Use Leftovers? <Switch checked={checked} onChange={handleCheck} />
-      </div>
-      <button className="pink-button" onClick={() => generateRecipes()}>
-        Generate
-      </button>
-      </>
-  : <h1>You must have at least one recipe associated with your account</h1>}
+      {recipes.length > 0 ? (
+        <>
+          <TableContainer component={Paper}>
+            <TableHead>
+              <TableRow>
+                <TableCell>Sunday</TableCell>
+                <TableCell>Monday</TableCell>
+                <TableCell>Tuesday</TableCell>
+                <TableCell>Wednesday</TableCell>
+                <TableCell>Thursday</TableCell>
+                <TableCell>Friday</TableCell>
+                <TableCell>Saturday</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                {dinners.length
+                  ? dinners.map((item) => {
+                      return (
+                        <TableCell>
+                          <Link className="recipe-link">
+                            {recipes[item - 1].name}
+                          </Link>
+                        </TableCell>
+                      );
+                    })
+                  : ""}
+              </TableRow>
+            </TableBody>
+          </TableContainer>
+          <div style={{ marginTop: "20px" }}>
+            Use Leftovers? <Switch checked={checked} onChange={handleCheck} />
+          </div>
+          <button className="pink-button" onClick={() => generateRecipes()}>
+            Generate
+          </button>
+        </>
+      ) : (
+        <h1>You must have at least one recipe associated with your account</h1>
+      )}
     </div>
-    );
-  };
+  );
+};
 
 export default Calendar;
