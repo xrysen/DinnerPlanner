@@ -11,13 +11,14 @@ import { useState, useEffect } from "react";
 import Link from "@material-ui/core/Link";
 import Modal from "@material-ui/core/Modal";
 import { useAuth0 } from "@auth0/auth0-react";
+import ChangeRecipe from "./ChangeRecipe";
 
 const Calendar = () => {
   const [dinners, setDinners] = useState([]);
   const [recipes, setRecipes] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const [checked, setChecked] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const { user, isAuthenticated } = useAuth0();
   const [userId, setUserId] = useState(0);
 
@@ -76,8 +77,15 @@ const Calendar = () => {
     setDinners(arr);
   };
 
+  const calendarEdit = (index) => {
+    setModalOpen(true);
+  }
+
   return (
     <div className="calendar-container">
+      <Modal open={modalOpen} className="modal">
+        <ChangeRecipe close = {()=> setModalOpen(false)} userId={userId} />
+      </Modal>
       {recipes.length > 0 ? (
         <>
           <TableContainer component={Paper}>
@@ -95,10 +103,13 @@ const Calendar = () => {
             <TableBody>
               <TableRow>
                 {dinners.length
-                  ? dinners.map((item) => {
+                  ? dinners.map((item, i) => {
                       return (
                         <TableCell>
-                          <Link className="recipe-link">
+                          <Link
+                            className="recipe-link"
+                            onClick={() => calendarEdit(i)}
+                          >
                             {recipes[item - 1].name}
                           </Link>
                         </TableCell>

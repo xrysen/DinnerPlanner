@@ -105,7 +105,7 @@ const ViewRecipes = (props) => {
           </Container>
         ) : (
           <Container style={{ textAlign: "center" }}>
-            <Grid style = {{ paddingTop: "50px" }}>Please Login</Grid>
+            <Grid style = {{ paddingTop: "50px" }}><h1>Please Login</h1></Grid>
             <Grid style = {{ paddingBottom: "50px"}}>
               <LoginButton />
             </Grid>

@@ -8,6 +8,8 @@ import AddNewIngredient from "./AddNewIngredient";
 import Modal from "@material-ui/core/Modal";
 import Switch from "@material-ui/core/Switch";
 import { useAuth0 } from "@auth0/auth0-react";
+import LoginButton from "./LoginButton";
+import { Container } from "@material-ui/core";
 
 const AddNewRecipe = (props) => {
   const { user, isAuthenticated } = useAuth0();
@@ -39,10 +41,10 @@ const AddNewRecipe = (props) => {
   useEffect(() => {
     if (isAuthenticated) {
       fetch(`http://localhost:8080/users?email=${user.email}`)
-      .then((res) => res.json())
-      .then((res) => setUserId(Number(res[0].id)))
+        .then((res) => res.json())
+        .then((res) => setUserId(Number(res[0].id)));
     }
-  })
+  });
 
   const handleIngredient = (index, event, value) => {
     let arr = [...ingredients];
@@ -164,9 +166,8 @@ const AddNewRecipe = (props) => {
       ingredients: ingredients,
       leftovers: checked,
     };
-    
-    if(!submitted) {
 
+    if (!submitted) {
       fetch(`http://localhost:8080/recipes`, {
         method: "POST",
         headers: {
@@ -188,56 +189,74 @@ const AddNewRecipe = (props) => {
 
   const handleFullRecipe = (event) => {
     setFullRecipe(event.target.checked);
-  }
+  };
 
   return (
     <div className="new-recipe.container">
-      {!isAuthenticated ? 
-        <h1>You must be logged in to view this page</h1>
-        :
-      <>
-      <h1>Add New Recipe or Meal</h1>
-      <form className="form-container" onSubmit={handleSubmit}>
-        <TextField
-          id="standard-basic"
-          label="Recipe Name"
-          onChange={handleRecipeName}
-          variant="outlined"
-          required
-          style={{ marginTop: "20px" }}
-          />
-        Add whole recipe? <Switch checked = {fullRecipe} onChange={handleFullRecipe} />
-        {fullRecipe && (
-          <>
-          <div className="ingredient-list">{items}</div>
-          <div className="icons">
-          <Icon className="icon" onClick={() => increaseIngredientCount()}>
-            add_circle
-          </Icon>
-          <Icon className="icon" onClick={() => decreaseIngredientCount()}>
-            remove
-          </Icon>
-        </div>
-        {directionText}
-        <div className="icons">
-          <Icon className="icon" onClick={() => increaseDirectionCount()}>
-            add_circle
-          </Icon>
-          <Icon className="icon" onClick={() => decreaseDirectionCount()}>
-            remove
-          </Icon>
-        </div>
-        Has Leftovers? <Switch checked={checked} onChange={handleCheck} />
+      {!isAuthenticated ? (
+        <Container style={{ textAlign: "center" }}>
+          <h1>You must be logged in to add a recipe or meal</h1>
+          <LoginButton />
+        </Container>
+      ) : (
+        <>
+          <h1>Add New Recipe or Meal</h1>
+          <form className="form-container" onSubmit={handleSubmit}>
+            <TextField
+              id="standard-basic"
+              label="Recipe Name"
+              onChange={handleRecipeName}
+              variant="outlined"
+              required
+              style={{ marginTop: "20px" }}
+            />
+            Add whole recipe?{" "}
+            <Switch checked={fullRecipe} onChange={handleFullRecipe} />
+            {fullRecipe && (
+              <>
+                <div className="ingredient-list">{items}</div>
+                <div className="icons">
+                  <Icon
+                    className="icon"
+                    onClick={() => increaseIngredientCount()}
+                  >
+                    add_circle
+                  </Icon>
+                  <Icon
+                    className="icon"
+                    onClick={() => decreaseIngredientCount()}
+                  >
+                    remove
+                  </Icon>
+                </div>
+                {directionText}
+                <div className="icons">
+                  <Icon
+                    className="icon"
+                    onClick={() => increaseDirectionCount()}
+                  >
+                    add_circle
+                  </Icon>
+                  <Icon
+                    className="icon"
+                    onClick={() => decreaseDirectionCount()}
+                  >
+                    remove
+                  </Icon>
+                </div>
+                Has Leftovers?{" "}
+                <Switch checked={checked} onChange={handleCheck} />
+              </>
+            )}
+            <input style={{ marginTop: "20px" }} type="submit" value="Submit" />
+          </form>
+          <Modal open={open} className="modal">
+            <AddNewIngredient close={handleModal} />
+          </Modal>
         </>
-        )}
-        <input style={{ marginTop: "20px" }} type="submit" value="Submit" />
-        </form>
-        <Modal open={open} className="modal">
-        <AddNewIngredient close={handleModal} />
-      </Modal>
-     </> }
+      )}
     </div>
-    );
+  );
 };
 
 export default AddNewRecipe;
