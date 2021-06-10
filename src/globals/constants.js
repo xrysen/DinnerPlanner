@@ -1,4 +1,4 @@
-const ENDPOINT = "https://evening-peak-81293.herokuapp.com/";
+const ENDPOINT = "http://localhost:8080";
 //localhost:8080
 
 exports.ENDPOINT = ENDPOINT;
