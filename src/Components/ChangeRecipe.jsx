@@ -13,7 +13,7 @@ const ChangeRecipe = (props) => {
   }, []);
 
   const handleChange = (i, event, value) => {
-    setRecipeId(value.id);
+    setRecipeId(recipes.indexOf(value) + 1);
   }
 
   return (

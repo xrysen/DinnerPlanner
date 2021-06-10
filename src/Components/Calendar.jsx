@@ -30,6 +30,7 @@ const Calendar = () => {
         .then((res) => {
           setRecipes(res);
           setLoaded(true);
+          console.log(res);
         });
     }
   }, [isAuthenticated, userId]);
@@ -66,6 +67,7 @@ const Calendar = () => {
         // If num recipes can fill a whole week, no doubles to be used
       } else if (arr.indexOf(recipeToUse) === -1 && recipes.length >= 7) {
         arr.push(recipeToUse);
+        // Unless Use Leftovers is checked
         if (
           recipes[recipeToUse - 1].has_leftovers &&
           checked &&
