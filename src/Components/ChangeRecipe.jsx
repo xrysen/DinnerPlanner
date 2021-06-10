@@ -32,7 +32,7 @@ const ChangeRecipe = (props) => {
         onChange={(event, value) => handleChange(0, event, value)}
       />
       <Button onClick={props.close}>Cancel</Button>
-      <Button onClick={()=> props.save(props.index, recipeId)}>Save</Button>
+      <Button onClick={()=> recipeId ? props.save(props.index, recipeId) : ""}>Save</Button>
     </Paper>
   );
 };
