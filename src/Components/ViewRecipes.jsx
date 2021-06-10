@@ -59,7 +59,10 @@ const ViewRecipes = (props) => {
   }, [isAuthenticated]);
 
   const handleClick = (index) => {
-    setCurrRec(index);
+    setTimeout(() => {
+
+      setCurrRec(index);
+    }, 500);
   };
 
   const handleDeletePrompt = (id, name) => {
