@@ -27,7 +27,7 @@ const ViewRecipe = (props) => {
         });
       });
     }
-  }, []);
+  }, [props.id, data]);
 
   if (isLoaded && recipeLoaded && data.length > 0) {
     return (
