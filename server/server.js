@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const path = require("path");
 require("dotenv").config();
 const cors = require("cors");
 const db = require("../db/db");
@@ -106,17 +105,6 @@ app.delete("/recipes/:id", (req, res) => {
 app.get("/food_types", (req, res) => {
   db.getFoodTypes().then((result) => res.status(200).send(result.rows));
 });
-
-
-if (process.env.NODE_ENV === "production") {
-  // Express will serve up production assets
-  app.use(express.static("build"));
-  
-  // Express will serve up the front-end index.html file if it doesn't recognize the route
-  app.get("*", (req, res) =>
-  res.sendFile(path.resolve("build", "index.html"))
-  );
-}
 
 app.listen(PORT, () => {
   console.log("Server started listening on port " + PORT);
