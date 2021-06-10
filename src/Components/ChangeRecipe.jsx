@@ -4,12 +4,17 @@ import { useState, useEffect } from "react";
 
 const ChangeRecipe = (props) => {
   const [recipes, setRecipes] = useState([]);
+  const [recipeId, setRecipeId] = useState(0);
 
   useEffect(() => {
     fetch(`http://localhost:8080/recipes/users/${props.userId}`)
       .then((res) => res.json())
       .then((res) => setRecipes(res));
   }, []);
+
+  const handleChange = (i, event, value) => {
+    setRecipeId(value.id);
+  }
 
   return (
     <Paper className="modal-content">
@@ -24,9 +29,10 @@ const ChangeRecipe = (props) => {
           <TextField {...params} label="Recipes" variant="outlined" />
         )}
         id="recipe"
+        onChange={(event, value) => handleChange(0, event, value)}
       />
       <Button onClick={props.close}>Cancel</Button>
-      <Button>Save</Button>
+      <Button onClick={()=> props.save(props.index, recipeId)}>Save</Button>
     </Paper>
   );
 };

@@ -21,6 +21,7 @@ const Calendar = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const { user, isAuthenticated } = useAuth0();
   const [userId, setUserId] = useState(0);
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -79,12 +80,21 @@ const Calendar = () => {
 
   const calendarEdit = (index) => {
     setModalOpen(true);
+    setIndex(index);
+  }
+
+  const saveEdit = (index, value) => {
+    let arr = [...dinners];
+    arr[index] = value;
+    setDinners(arr);
+    console.log(dinners);
+    setModalOpen(false);
   }
 
   return (
     <div className="calendar-container">
       <Modal open={modalOpen} className="modal">
-        <ChangeRecipe close = {()=> setModalOpen(false)} userId={userId} />
+        <ChangeRecipe index = {index} close = {()=> setModalOpen(false)} userId={userId} save = {saveEdit} />
       </Modal>
       {recipes.length > 0 ? (
         <>
