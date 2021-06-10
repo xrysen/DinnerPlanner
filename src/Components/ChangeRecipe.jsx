@@ -1,13 +1,14 @@
 import { Button, Paper, TextField } from "@material-ui/core";
 import AutoComplete from "@material-ui/lab/Autocomplete";
 import { useState, useEffect } from "react";
+import { ENDPOINT } from "../globals/constants";
 
 const ChangeRecipe = (props) => {
   const [recipes, setRecipes] = useState([]);
   const [recipeId, setRecipeId] = useState(0);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/recipes/users/${props.userId}`)
+    fetch(`${ENDPOINT}/recipes/users/${props.userId}`)
       .then((res) => res.json())
       .then((res) => setRecipes(res));
   }, []);

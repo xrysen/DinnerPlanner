@@ -10,6 +10,7 @@ import Switch from "@material-ui/core/Switch";
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "./LoginButton";
 import { Container } from "@material-ui/core";
+import { ENDPOINT } from "../globals/constants";
 
 const AddNewRecipe = (props) => {
   const { user, isAuthenticated } = useAuth0();
@@ -33,14 +34,14 @@ const AddNewRecipe = (props) => {
   const directionText = [];
 
   useEffect(() => {
-    fetch("http://localhost:8080/ingredients")
+    fetch(`${ENDPOINT}/ingredients`)
       .then((res) => res.json())
       .then((res) => setExistingIng(res));
   }, [existingIng]);
 
   useEffect(() => {
     if (isAuthenticated) {
-      fetch(`http://localhost:8080/users?email=${user.email}`)
+      fetch(`${ENDPOINT}/users?email=${user.email}`)
         .then((res) => res.json())
         .then((res) => setUserId(Number(res[0].id)));
     }
@@ -168,7 +169,7 @@ const AddNewRecipe = (props) => {
     };
 
     if (!submitted) {
-      fetch(`http://localhost:8080/recipes`, {
+      fetch(`${ENDPOINT}/recipes`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

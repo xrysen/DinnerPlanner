@@ -5,6 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
+import { ENDPOINT } from "../globals/constants";
 
 const AddNewIngredient = (props) => {
   const [options, setOptions] = useState([]);
@@ -12,7 +13,7 @@ const AddNewIngredient = (props) => {
   const [name, setName] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:8080/food_types")
+    fetch(`${ENDPOINT}/food_types`)
       .then((res) => res.json())
       .then((result) => setOptions(result));
   }, []);
@@ -33,7 +34,7 @@ const AddNewIngredient = (props) => {
 
     e.preventDefault();
 
-    fetch("http://localhost:8080/ingredients", {
+    fetch(`${ENDPOINT}/ingredients`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

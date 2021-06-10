@@ -1,4 +1,5 @@
 import "./App.scss";
+import "./globals/constants";
 import AddNewRecipe from "./Components/AddNewRecipe";
 import { useState } from "react";
 import ViewRecipes from "./Components/ViewRecipes";

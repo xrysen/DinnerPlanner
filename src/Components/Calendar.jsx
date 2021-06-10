@@ -12,6 +12,7 @@ import Link from "@material-ui/core/Link";
 import Modal from "@material-ui/core/Modal";
 import { useAuth0 } from "@auth0/auth0-react";
 import ChangeRecipe from "./ChangeRecipe";
+import { ENDPOINT } from "../globals/constants";
 
 const Calendar = () => {
   const [dinners, setDinners] = useState([]);
@@ -25,7 +26,7 @@ const Calendar = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      fetch(`http://localhost:8080/recipes/users/${userId}`)
+      fetch(`${ENDPOINT}/recipes/users/${userId}`)
         .then((res) => res.json())
         .then((res) => {
           setRecipes(res);
@@ -37,7 +38,7 @@ const Calendar = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      fetch(`http://localhost:8080/users?email=${user.email}&name=${user.name}`)
+      fetch(`${ENDPOINT}/users?email=${user.email}&name=${user.name}`)
         .then((res) => res.json())
         .then((res) => {
           setUserId(res[0].id);

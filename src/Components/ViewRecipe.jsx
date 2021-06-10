@@ -1,6 +1,7 @@
 import "./ViewRecipe.scss";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useEffect, useState } from "react";
+import { ENDPOINT } from "../globals/constants";
 
 const ViewRecipe = (props) => {
   const [data, setData] = useState([]);
@@ -9,7 +10,7 @@ const ViewRecipe = (props) => {
   const [recipeLoaded, setRecipeLoaded] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/recipes/${props.id}`, {method: "GET"}).then((res) =>
+    fetch(`${ENDPOINT}/recipes/${props.id}`, {method: "GET"}).then((res) =>
       res.json().then((result) => {
         setData(result);
         setRecipeLoaded(true);
@@ -17,7 +18,7 @@ const ViewRecipe = (props) => {
     );
     if (props.id) {
 
-      fetch(`http://localhost:8080/directions/`, {method: "GET"}).then((res) => {
+      fetch(`${ENDPOINT}/directions/`, {method: "GET"}).then((res) => {
         res.json().then((result) => {
           setDirections(result);
           setTimeout(() => {

@@ -12,6 +12,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
 import Modal from "@material-ui/core/Modal";
 import DeleteRecipePrompt from "./DeleteRecipePrompt";
+import { ENDPOINT } from "../globals/constants";
 
 const ViewRecipes = (props) => {
   const [recipes, setRecipes] = useState([]);
@@ -23,7 +24,7 @@ const ViewRecipes = (props) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      fetch(`http://localhost:8080/recipes/users/${userId}`)
+      fetch(`${ENDPOINT}/recipes/users/${userId}`)
         .then((res) => res.json())
         .then((res) => {
           setRecipes(res);
@@ -33,7 +34,7 @@ const ViewRecipes = (props) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      fetch(`http://localhost:8080/users?email=${user.email}&name=${user.name}`)
+      fetch(`${ENDPOINT}/users?email=${user.email}&name=${user.name}`)
         .then((res) => res.json())
         .then((res) => {
           if (res[0].id) {
@@ -43,7 +44,7 @@ const ViewRecipes = (props) => {
               email: user.email,
               name: user.name,
             };
-            fetch(`http://localhost:8080/users`, {
+            fetch(`${ENDPOINT}/users`, {
               method: "POST",
               headers: {
                 "Content-type": "application/json",

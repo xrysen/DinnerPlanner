@@ -1,9 +1,10 @@
 import { Paper, Button } from "@material-ui/core";
+import { ENDPOINT } from "../globals/constants";
 
 const DeleteRecipePrompt = (props) => {
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:8080/recipes/${props.recipe.id}`, {
+    fetch(`${ENDPOINT}/recipes/${props.recipe.id}`, {
       method: "DELETE",
     }).then(()=> props.close());
   };

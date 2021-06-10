@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
+import { ENDPOINT } from "../globals/constants";
 
 const ShowIngredients = () => {
   const [ingredients, setIngredients] = useState([]);
   const [loaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:8080/ingredients/")
+    fetch(`${ENDPOINT}/ingredients/`)
       .then((res) => res.json())
       .then((result) => {
         setIngredients(result);
