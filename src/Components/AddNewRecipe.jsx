@@ -86,6 +86,7 @@ const AddNewRecipe = (props) => {
         id="standard-basic"
         label="Direction"
         variant="outlined"
+        value = {directions[i]}
         fullWidth
         onChange={(event) => handleDirection(i, event)}
       />
@@ -97,6 +98,7 @@ const AddNewRecipe = (props) => {
       <div className="ingredient">
         <AutoComplete
           key={i}
+          value={ingredients[i]}
           style={{ width: "200px", marginTop: "10px" }}
           id="ingredient"
           options={existingIng}

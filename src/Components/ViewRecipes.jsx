@@ -8,8 +8,8 @@ import ViewRecipe from "./ViewRecipe";
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "./LoginButton";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-import EditIcon from '@material-ui/icons/Edit';
-import AddIcon from '@material-ui/icons/Add';
+import EditIcon from "@material-ui/icons/Edit";
+import AddIcon from "@material-ui/icons/Add";
 import Modal from "@material-ui/core/Modal";
 import DeleteRecipePrompt from "./DeleteRecipePrompt";
 import { ENDPOINT } from "../globals/constants";
@@ -59,28 +59,27 @@ const ViewRecipes = (props) => {
   }, [isAuthenticated]);
 
   const handleClick = (index) => {
-    setTimeout(() => {
-
-      setCurrRec(index);
-    }, 500);
+    setCurrRec(index);
   };
 
   const handleDeletePrompt = (id, name) => {
     const recipe = {
       id: id,
-      name: name
-    }
+      name: name,
+    };
     setSelectedRecipe(recipe);
     setModalOpen(true);
-  }
+  };
 
   return (
     <div>
       <Box>
-      <Modal open={modalOpen} className="modal">
-        
-        <DeleteRecipePrompt close = {()=> setModalOpen(false)} recipe = {selectedRecipe}  />
-      </Modal>
+        <Modal open={modalOpen} className="modal">
+          <DeleteRecipePrompt
+            close={() => setModalOpen(false)}
+            recipe={selectedRecipe}
+          />
+        </Modal>
         {isAuthenticated ? (
           <Container>
             <Grid container spacing={2}>
@@ -91,7 +90,12 @@ const ViewRecipes = (props) => {
                       return (
                         <div key={item.id}>
                           {/* <EditIcon className = "icon-edit" /> */}
-                          <DeleteForeverIcon className = "icon-delete" onClick={()=> handleDeletePrompt(item.id, item.name)} />
+                          <DeleteForeverIcon
+                            className="icon-delete"
+                            onClick={() =>
+                              handleDeletePrompt(item.id, item.name)
+                            }
+                          />
                           <Button onClick={() => handleClick(item.id)}>
                             {item.name}
                           </Button>
@@ -99,7 +103,7 @@ const ViewRecipes = (props) => {
                       );
                     })
                   : ""}
-                <AddIcon className = "icon-add" />
+                <AddIcon className="icon-add" />
                 <Button onClick={props.addNew}>Add New Recipe</Button>
               </Grid>
               <Grid item md={6}>
@@ -109,14 +113,15 @@ const ViewRecipes = (props) => {
           </Container>
         ) : (
           <Container style={{ textAlign: "center" }}>
-            <Grid style = {{ paddingTop: "50px" }}><h1>Please Login</h1></Grid>
-            <Grid style = {{ paddingBottom: "50px"}}>
+            <Grid style={{ paddingTop: "50px" }}>
+              <h1>Please Login</h1>
+            </Grid>
+            <Grid style={{ paddingBottom: "50px" }}>
               <LoginButton />
             </Grid>
           </Container>
         )}
       </Box>
-      
     </div>
   );
 };
