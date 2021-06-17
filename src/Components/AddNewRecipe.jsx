@@ -86,19 +86,18 @@ const AddNewRecipe = (props) => {
         id="standard-basic"
         label="Direction"
         variant="outlined"
-        value = {directions[i]}
+        value={directions[i]}
         fullWidth
         onChange={(event) => handleDirection(i, event)}
       />
     );
   }
 
-  for (let i = 0; i <= numIngredients; i++) {
+  for (let j = 0; j <= numIngredients; j++) {
     items.push(
       <div className="ingredient">
         <AutoComplete
-          key={i}
-          value={ingredients[i]}
+          key={j}
           style={{ width: "200px", marginTop: "10px" }}
           id="ingredient"
           options={existingIng}
@@ -107,7 +106,7 @@ const AddNewRecipe = (props) => {
           renderInput={(params) => (
             <TextField {...params} label="Ingredient" variant="outlined" />
           )}
-          onChange={(event, value) => handleIngredient(i, event, value)}
+          onChange={(event, value) => handleIngredient(j, event, value)}
           noOptionsText={
             <Button
               variant="outlined"
@@ -122,7 +121,7 @@ const AddNewRecipe = (props) => {
           style={{ width: "100px", marginTop: "10px" }}
           placeholder="1 tsp"
           variant="outlined"
-          onChange={(event) => handleMeasurement(i, event)}
+          onChange={(event) => handleMeasurement(j, event)}
           required
         />
       </div>
