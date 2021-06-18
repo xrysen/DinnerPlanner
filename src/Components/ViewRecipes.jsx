@@ -13,6 +13,7 @@ import AddIcon from "@material-ui/icons/Add";
 import Modal from "@material-ui/core/Modal";
 import DeleteRecipePrompt from "./DeleteRecipePrompt";
 import { ENDPOINT } from "../globals/constants";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const ViewRecipes = (props) => {
   const [recipes, setRecipes] = useState([]);
@@ -20,7 +21,7 @@ const ViewRecipes = (props) => {
   const [userId, setUserId] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedRecipe, setSelectedRecipe] = useState({});
-  const { user, isAuthenticated } = useAuth0();
+  const { user, isAuthenticated, isLoading } = useAuth0();
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -70,6 +71,14 @@ const ViewRecipes = (props) => {
     setSelectedRecipe(recipe);
     setModalOpen(true);
   };
+
+  if (isLoading) {
+    return (
+    <Container style = {{ textAlign: "center"}}>
+      <CircularProgress />
+    </Container>
+    )
+  }
 
   return (
     <div>
