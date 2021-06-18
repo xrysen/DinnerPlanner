@@ -13,6 +13,8 @@ import Modal from "@material-ui/core/Modal";
 import { useAuth0 } from "@auth0/auth0-react";
 import ChangeRecipe from "./ChangeRecipe";
 import { ENDPOINT } from "../globals/constants";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Container from "@material-ui/core/Container";
 
 const Calendar = () => {
   const [dinners, setDinners] = useState([]);
@@ -20,7 +22,7 @@ const Calendar = () => {
   const [loaded, setLoaded] = useState(false);
   const [checked, setChecked] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const { user, isAuthenticated } = useAuth0();
+  const { user, isAuthenticated, isLoading } = useAuth0();
   const [userId, setUserId] = useState(0);
   const [index, setIndex] = useState(0);
 
@@ -31,7 +33,6 @@ const Calendar = () => {
         .then((res) => {
           setRecipes(res);
           setLoaded(true);
-          console.log(res);
         });
     }
   }, [isAuthenticated, userId]);
@@ -94,12 +95,18 @@ const Calendar = () => {
     setModalOpen(false);
   }
 
+  if (!loaded || isLoading) {
+    <Container stlye = {{ textAlign: "center" }}>
+      <CircularProgress />
+    </Container>
+  }
+
   return (
     <div className="calendar-container">
       <Modal open={modalOpen} className="modal">
         <ChangeRecipe index = {index} close = {()=> setModalOpen(false)} userId={userId} save = {saveEdit} />
       </Modal>
-      {recipes.length > 0 ? (
+      {recipes.length > 0 && loaded ? (
         <>
           <TableContainer component={Paper}>
             <TableHead>

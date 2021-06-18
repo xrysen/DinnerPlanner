@@ -10,24 +10,24 @@ const ViewRecipe = (props) => {
   const [recipeLoaded, setRecipeLoaded] = useState(false);
 
   useEffect(() => {
-    fetch(`${ENDPOINT}/recipes/${props.id}`, {method: "GET"}).then((res) =>
+    fetch(`${ENDPOINT}/recipes/${props.id}`, { method: "GET" }).then((res) =>
       res.json().then((result) => {
         setData(result);
         setRecipeLoaded(true);
       })
     );
-    if (props.id) {
+  }, [props.id]);
 
-      fetch(`${ENDPOINT}/directions/`, {method: "GET"}).then((res) => {
+  useEffect(() => {
+    if (props.id) {
+      fetch(`${ENDPOINT}/directions/`, { method: "GET" }).then((res) => {
         res.json().then((result) => {
           setDirections(result);
-          setTimeout(() => {
-            setIsLoaded(true);
-          }, 500);
+          setIsLoaded(true);
         });
       });
     }
-  }, [props.id, data]);
+  }, []);
 
   if (isLoaded && recipeLoaded && data.length > 0) {
     return (
@@ -38,7 +38,7 @@ const ViewRecipe = (props) => {
           <div className="ingredients" id="ingredients">
             {data.map((item) => {
               return (
-                <span key = {item.ingredient}>
+                <span key={item.ingredient}>
                   <strong>{item.measurement}</strong> - {item.ingredient}
                 </span>
               );
@@ -48,8 +48,12 @@ const ViewRecipe = (props) => {
             <h3>Directions:</h3>
             <ol>
               {directions.map((item) => {
-                return (item.recipe_id === props.id ? <li key={item.directions}>{item.directions}</li> : ""
-              )})}
+                return item.recipe_id === props.id ? (
+                  <li key={item.directions}>{item.directions}</li>
+                ) : (
+                  ""
+                );
+              })}
             </ol>
           </div>
         </div>
